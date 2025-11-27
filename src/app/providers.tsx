@@ -13,6 +13,7 @@ import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 import { chains } from "@lens-chain/sdk/viem";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { FullScreenVideo } from "./componentes/Common/types/common.types";
+import { mainnet, PublicClient } from "@lens-protocol/client";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ export const ModalContext = createContext<
       rewind: RefObject<HTMLDivElement | null>;
       handleRewind: () => void;
       changeColor: () => void;
+      lensClient: PublicClient | undefined;
     }
   | undefined
 >(undefined);
@@ -48,6 +50,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   const handleRewind = (): void => {
     rewind.current?.scrollIntoView({ behavior: "smooth" });
   };
+  const [lensClient, setLensClient] = useState<PublicClient | undefined>();
   const [fullScreenVideo, setFullScreenVideo] = useState<FullScreenVideo>({
     open: false,
     allVideos: [],
@@ -70,6 +73,17 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       localStorage.setItem("digi-theme-color", THEME_COLORS[0]);
     }
   };
+
+  useEffect(() => {
+    if (!lensClient) {
+      setLensClient(
+        PublicClient.create({
+          environment: mainnet,
+          storage: window.localStorage,
+        })
+      );
+    }
+  }, []);
 
   useEffect(() => {
     if (window) {
@@ -181,6 +195,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
             value={{
               heartColor,
               rewind,
+              lensClient,
               handleRewind,
               changeColor,
               fullScreenVideo,
