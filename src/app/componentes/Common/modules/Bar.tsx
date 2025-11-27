@@ -2,7 +2,7 @@ import {
   idiomaAImagen,
   Idiomas,
   indiceAIdioma,
-  INFURA_GATEWAY_INTERNAL
+  INFURA_GATEWAY_INTERNAL,
 } from "@/app/lib/constants";
 import { ModalContext } from "@/app/providers";
 import Image from "next/legacy/image";
@@ -17,11 +17,8 @@ import Marquee from "react-fast-marquee";
 
 const Bar: FunctionComponent<BarProps> = ({
   dict,
-  currentVideo,
-  changeVideo,
   setChosenLanguage,
   chosenLanguage,
-  handleShop,
   changeLanguage,
 }): JSX.Element => {
   const context = useContext(ModalContext);
@@ -92,13 +89,7 @@ const Bar: FunctionComponent<BarProps> = ({
         <div className="relative w-fit h-fit flex items-center justify-center">
           <Heart
             changeColor={() => {
-              context?.setScreen(undefined);
               context?.changeColor();
-              changeVideo(
-                Number(currentVideo) < 10 || Number(currentVideo) == 19
-                  ? 10
-                  : Number(currentVideo) + 1
-              );
             }}
             heartColor={context?.heartColor!}
           />
@@ -109,8 +100,6 @@ const Bar: FunctionComponent<BarProps> = ({
           <div
             className={`relative w-fit h-fit flex items-center justify-center hover:-rotate-12 cursor-sewingHS`}
             onClick={() => {
-              context?.setScreen(undefined);
-              changeVideo(6);
               context?.setFullScreenVideo({
                 open: context?.fullScreenVideo?.open ? false : true,
                 time: context?.fullScreenVideo?.time,
@@ -151,9 +140,7 @@ const Bar: FunctionComponent<BarProps> = ({
           <div
             className="relative w-full h-full cursor-sewingHS bg-gradient-to-r from-mainBg via-transparent flex items-center justify-center rounded-r-md to-transparent"
             onClick={() => {
-              handleShop();
-              context?.setScreen(undefined);
-              changeVideo(8);
+              window.open("https://triplea.agentmeme.xyz/gallery")
             }}
           ></div>
         </div>

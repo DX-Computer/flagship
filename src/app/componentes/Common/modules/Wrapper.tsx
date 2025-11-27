@@ -1,4 +1,3 @@
-import FooterEntry from "./FooterEntry";
 import { JSX } from "react";
 import ModalsEntry from "../../Modals/modules/ModalsEntry";
 
@@ -16,7 +15,6 @@ export default function Wrapper({
         id="noScroll"
       >
         {page}
-        <FooterEntry dict={dict} />
       </div>
       <ModalsEntry dict={dict} />
     </>

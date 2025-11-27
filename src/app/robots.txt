@@ -2,4 +2,3 @@ User-Agent: *
 Allow: /
 
 Sitemap: https://dx.computer/sitemap.xml
-Sitemap: https://dx.computer/image-sitemap.xml

@@ -13,46 +13,17 @@ import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 import { chains } from "@lens-chain/sdk/viem";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { FullScreenVideo } from "./componentes/Common/types/common.types";
-import { mainnet, PublicClient } from "@lens-protocol/client";
 
 const queryClient = new QueryClient();
 
 export const ModalContext = createContext<
   | {
-      lensClient: PublicClient | undefined;
       setFullScreenVideo: (e: SetStateAction<FullScreenVideo>) => void;
       fullScreenVideo: FullScreenVideo;
       heartColor: string;
       rewind: RefObject<HTMLDivElement | null>;
       handleRewind: () => void;
       changeColor: () => void;
-      timeline: boolean;
-      setTimeline: (e: SetStateAction<boolean>) => void;
-      setBookMessage: (
-        e: SetStateAction<{ open: boolean; transparent: boolean }>
-      ) => void;
-      screen: { title: string; index: number; description: string } | undefined;
-      setScreen: (
-        e: SetStateAction<
-          { title: string; index: number; description: string } | undefined
-        >
-      ) => void;
-      bookMessage: { open: boolean; transparent: boolean };
-      setImageViewer: (
-        e: SetStateAction<
-          | {
-              type: string;
-              content: string;
-            }
-          | undefined
-        >
-      ) => void;
-      imageViewer:
-        | {
-            type: string;
-            content: string;
-          }
-        | undefined;
     }
   | undefined
 >(undefined);
@@ -77,33 +48,12 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   const handleRewind = (): void => {
     rewind.current?.scrollIntoView({ behavior: "smooth" });
   };
-  const [lensClient, setLensClient] = useState<PublicClient | undefined>();
-  const [screen, setScreen] = useState<{
-    title: string;
-    index: number;
-    description: string;
-  }>();
   const [fullScreenVideo, setFullScreenVideo] = useState<FullScreenVideo>({
     open: false,
     allVideos: [],
     index: 0,
-    volume: 0.5
+    volume: 0.5,
   });
-  const [imageViewer, setImageViewer] = useState<
-    | {
-        type: string;
-        content: string;
-      }
-    | undefined
-  >();
-  const [bookMessage, setBookMessage] = useState<{
-    open: boolean;
-    transparent: boolean;
-  }>({
-    open: false,
-    transparent: false,
-  });
-  const [timeline, setTimeline] = useState<boolean>(false);
   const [color, setColor] = useState<string>(THEME_COLORS[0]);
   const [heartColor, setHeartColor] = useState<string>(THEME_COLORS[0]);
   const changeColor = () => {
@@ -120,17 +70,6 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       localStorage.setItem("digi-theme-color", THEME_COLORS[0]);
     }
   };
-
-  useEffect(() => {
-    if (!lensClient) {
-      setLensClient(
-        PublicClient.create({
-          environment: mainnet,
-          storage: window.localStorage,
-        })
-      );
-    }
-  }, []);
 
   useEffect(() => {
     if (window) {
@@ -240,21 +179,12 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         >
           <ModalContext.Provider
             value={{
-              timeline,
-              setTimeline,
-              fullScreenVideo,
-              setFullScreenVideo,
-              setImageViewer,
-              imageViewer,
               heartColor,
               rewind,
-              bookMessage,
-              setBookMessage,
               handleRewind,
               changeColor,
-              screen,
-              setScreen,
-              lensClient,
+              fullScreenVideo,
+              setFullScreenVideo,
             }}
           >
             <div

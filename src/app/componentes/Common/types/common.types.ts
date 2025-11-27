@@ -22,7 +22,6 @@ export type HeartProps = {
 };
 
 export type HeaderProps = {
-  handleShop: () => void;
   dict: any;
 };
 
@@ -74,24 +73,17 @@ export type BarProps = {
   dict: any;
   setChosenLanguage: (e: SetStateAction<number>) => void;
   chosenLanguage: number;
-  currentVideo: number | undefined;
-  changeVideo: (index: number) => void;
   changeLanguage: (lang: string) => void;
-  handleShop: () => void;
 };
 
 export type VideoProps = {
-  currentVideo: number | undefined;
   setVideoLoading: (e: SetStateAction<boolean>) => void;
   videoLoading: boolean;
 };
 
 export type ScreenProps = {
   dict: any;
-  currentVideo: number | undefined;
   changeLanguage: (lang: string) => void;
-  changeVideo: (index: number) => void;
-  handleShop: () => void;
   setVideoLoading: (e: SetStateAction<boolean>) => void;
   videoLoading: boolean;
   setChosenLanguage: (e: SetStateAction<number>) => void;

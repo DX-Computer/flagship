@@ -1,5 +1,4 @@
 import Modals from "../componentes/Modals/modules/Modals";
-import Footer from "../componentes/Common/modules/Footer";
 
 export type tParams = Promise<{ lang: string }>;
 
@@ -21,7 +20,6 @@ export default function RootLayout({
         id="noScroll"
       >
         {children}
-        <Footer params={params} />
       </div>
       <Modals params={params} />
     </>
