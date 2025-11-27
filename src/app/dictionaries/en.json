@@ -6,7 +6,20 @@
     "go": "GO",
     "select": "select language",
     "soon": "soon",
-    "ve": "go"
+    "ve": "go",
+    "discoverT": "discover",
+    "discoverD": "find your way",
+    "designT": "design",
+    "designD": "in your own style",
+    "distroT": "distro",
+    "distroD": "attention's all you need",
+    "collectT": "collect",
+    "collectD": "buy, sell, use & trade",
+    "creativeT": "creative production",
+    "creativeD": "made to order",
+    "fulfillT": "fulfillment",
+    "fulfillD": "local, private & p2p",
+    "agents": "Multiagent workflows\nfor human agency"
   },
   "404": {
     "glitch": "There's been a glitch in the fabric. Find your way back",

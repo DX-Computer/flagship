@@ -20,22 +20,64 @@ const Screen: FunctionComponent<ScreenProps> = ({
 }): JSX.Element => {
   return (
     <div id="header" className="half:gap-0 gap-3">
-      <div className="relative w-full half:w-fit h-full flex items-end justify-end half:order-1 order-2 text-mainText font-nerd">
-        <div className="relative w-full h-full half:w-80 flex flex-col gap-2 items-end justify-between">
-          <div className="relative w-full justify-between h-full flex flex-row gap-5 items-end">
-            <div className="relative w-full sm:w-fit half:w-full h-full flex bg-[#985458] items-end">
-              <div className="relative w-full sm:w-80 half:w-full h-80 half:h-[70vh] flex">
-                <Image
-                  draggable={false}
-                  objectFit="cover"
-                  layout="fill"
-                  objectPosition={"center"}
-                  src={`${INFURA_GATEWAY_INTERNAL}QmVGsLUY9EmS9MPAcjHkAQ6k55P3vyBH5nZKHLTj4EsPyL`}
-                />
-              </div>
+      <div className="relative w-fit h-full flex items-start justify-start half:order-1 order-2 text-mainText font-nerd">
+        <div className="relative w-full half:h-full half:w-80 h-fit sm:h-52 flex flex-col gap-2 items-start justify-between">
+          <div className="relative w-fit h-fit flex">
+            {dict?.common?.agents}
+          </div>
+          <div className="relative text-xs flex half:flex-nowrap flex-wrap half:flex-col gap-3 items-start justify-start h-fit w-full">
+            {[
+              {
+                title: dict?.common?.discoverT,
+                description: dict?.common?.discoverD,
+              },
+              {
+                title: dict?.common?.designT,
+                description: dict?.common?.designD,
+              },
+              {
+                title: dict?.common?.distroT,
+                description: dict?.common?.distroD,
+              },
+              {
+                title: dict?.common?.collectT,
+                description: dict?.common?.collectD,
+              },
+              {
+                title: dict?.common?.creativeT,
+                description: dict?.common?.creativeD,
+              },
+              {
+                title: dict?.common?.fulfillT,
+                description: dict?.common?.fulfillD,
+              },
+            ].map((item, index) => {
+              return (
+                <div
+                  key={index}
+                  className="relative flex w-fit h-fit flex gap-2 flex-row items-center justify-between"
+                >
+                  <div className="relative w-fit h-fit py-1 px-1.5 flex items-center justify-center border border-mainText">
+                    {item.title}
+                  </div>
+                  <div className="relative h-fit flex w-fit">
+                    - {item.description}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="relative w-full justify-between h-fit half:h-full flex flex-row gap-5">
+            <div className="relative w-full h-20 half:h-full flex bg-[#985458]">
+              <Image
+                draggable={false}
+                objectFit="cover"
+                layout="fill"
+                src={`${INFURA_GATEWAY_INTERNAL}QmVGsLUY9EmS9MPAcjHkAQ6k55P3vyBH5nZKHLTj4EsPyL`}
+              />
             </div>
-            <div className="relative w-fit sm:w-full half:w-fit h-full flex items-end justify-end">
-              <div className="relative w-10 sm:w-full half:w-8 h-full flex bg-[#985458]"></div>
+            <div className="relative w-fit h-20 half:h-full flex items-end justify-end">
+              <div className="relative w-8 h-full flex bg-[#985458]"></div>
             </div>
           </div>
         </div>
