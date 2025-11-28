@@ -2,9 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 
-const MIDDLE_UP = "IGITALA";
-const MIDDLE_LOW = "IGITALA";
+const MIDDLE = "IGITALA";
 const DOMAIN = ".COMPUTER";
+const LEN_DELTA_DOMAIN = ("ΔX" + DOMAIN).length;
 
 const nextPhase = (p: number) => (p === 17 ? 1 : p + 1);
 
@@ -18,27 +18,26 @@ export default function TypeReverse() {
       const next = index + 1;
       const u = phase;
       const dLen = DOMAIN.length;
-      const mUpLen = MIDDLE_UP.length;
-      const mLowLen = MIDDLE_LOW.length;
+      const mLen = MIDDLE.length;
 
-      if (u === 0 && next <= dLen) setIndex(next);          // type DX.COMPUTER
-      else if (u === 1 && next <= 60) setIndex(next);       // pause DX.COMPUTER
-      else if (u === 2 && next <= dLen) setIndex(next);     // delete .COMPUTER -> DX
-      else if (u === 3 && next <= 30) setIndex(next);       // pause DX
-      else if (u === 4 && next <= mUpLen) setIndex(next);   // type IGITALA -> DIGITALAX
-      else if (u === 5 && next <= 60) setIndex(next);       // pause DIGITALAX
-      else if (u === 6 && next <= mUpLen) setIndex(next);   // delete IGITALA -> DX
-      else if (u === 7 && next <= 30) setIndex(next);       // pause DX
-      else if (u === 8 && next <= 20) setIndex(next);       // Δx hold
-      else if (u === 9 && next <= dLen) setIndex(next);     // Δx + .COMPUTER
-      else if (u === 10 && next <= 60) setIndex(next);      // pause Δx.COMPUTER
-      else if (u === 11 && next <= 20) setIndex(next);      // δx.COMPUTER hold
-      else if (u === 12 && next <= dLen) setIndex(next);    // delete .COMPUTER -> δx
-      else if (u === 13 && next <= mLowLen) setIndex(next); // type igitala -> δigitalax
-      else if (u === 14 && next <= 60) setIndex(next);      // pause δigitalax
-      else if (u === 15 && next <= mLowLen) setIndex(next); // delete iginala -> δx
-      else if (u === 16 && next <= 20) setIndex(next);      // change δx -> DX hold
-      else if (u === 17 && next <= dLen) setIndex(next);    // type .COMPUTER -> DX.COMPUTER
+      if (u === 0 && next <= dLen) setIndex(next);
+      else if (u === 1 && next <= 60) setIndex(next);
+      else if (u === 2 && next <= dLen) setIndex(next);
+      else if (u === 3 && next <= 30) setIndex(next);
+      else if (u === 4 && next <= mLen) setIndex(next);
+      else if (u === 5 && next <= 60) setIndex(next);
+      else if (u === 6 && next <= mLen) setIndex(next);
+      else if (u === 7 && next <= 30) setIndex(next);
+      else if (u === 8 && next <= 20) setIndex(next);
+      else if (u === 9 && next <= dLen) setIndex(next);
+      else if (u === 10 && next <= LEN_DELTA_DOMAIN) setIndex(next);
+      else if (u === 11 && next <= LEN_DELTA_DOMAIN) setIndex(next);
+      else if (u === 12 && next <= dLen) setIndex(next);
+      else if (u === 13 && next <= mLen) setIndex(next);
+      else if (u === 14 && next <= 60) setIndex(next);
+      else if (u === 15 && next <= mLen) setIndex(next);
+      else if (u === 16 && next <= 20) setIndex(next);
+      else if (u === 17 && next <= dLen) setIndex(next);
       else {
         setPhase(nextPhase(phase));
         setIndex(0);
@@ -75,15 +74,15 @@ export default function TypeReverse() {
     text = "DX";
     cursorPos = text.length;
   } else if (u === 4) {
-    const mid = MIDDLE_UP.slice(0, index);
+    const mid = MIDDLE.slice(0, index);
     text = "D" + mid + "X";
     cursorPos = text.length - 1;
   } else if (u === 5) {
     text = "DIGITALAX";
     cursorPos = text.length;
   } else if (u === 6) {
-    const remaining = Math.max(0, MIDDLE_UP.length - index);
-    const mid = MIDDLE_UP.slice(0, remaining);
+    const remaining = Math.max(0, MIDDLE.length - index);
+    const mid = MIDDLE.slice(0, remaining);
     text = "D" + mid + "X";
     cursorPos = text.length - 1;
   } else if (u === 7) {
@@ -91,32 +90,34 @@ export default function TypeReverse() {
     cursorPos = text.length;
   } else if (u === 8) {
     text = "ΔX";
-    cursorPos = text.length;
+    cursorPos = 1;
   } else if (u === 9) {
     const part = DOMAIN.slice(0, index);
     text = "ΔX" + part;
     cursorPos = text.length;
   } else if (u === 10) {
     text = "ΔX" + DOMAIN;
-    cursorPos = text.length;
+    const L = text.length;
+    cursorPos = Math.max(0, L - index);
   } else if (u === 11) {
     text = "δX" + DOMAIN;
-    cursorPos = text.length;
+    const L = text.length;
+    cursorPos = Math.min(L, index);
   } else if (u === 12) {
     const remaining = Math.max(0, DOMAIN.length - index);
     const part = DOMAIN.slice(0, remaining);
     text = "δX" + part;
     cursorPos = text.length;
   } else if (u === 13) {
-    const mid = MIDDLE_LOW.slice(0, index);
+    const mid = MIDDLE.slice(0, index);
     text = "δ" + mid + "X";
     cursorPos = text.length - 1;
   } else if (u === 14) {
     text = "δIGITALAX";
     cursorPos = text.length;
   } else if (u === 15) {
-    const remaining = Math.max(0, MIDDLE_LOW.length - index);
-    const mid = MIDDLE_LOW.slice(0, remaining);
+    const remaining = Math.max(0, MIDDLE.length - index);
+    const mid = MIDDLE.slice(0, remaining);
     text = "δ" + mid + "X";
     cursorPos = text.length - 1;
   } else if (u === 16) {
