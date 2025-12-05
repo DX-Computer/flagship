@@ -32,7 +32,7 @@ const Entry: FunctionComponent<{ dict: any }> = ({ dict }): JSX.Element => {
           {dict.common?.cc0}
         </div>
         <div
-          className="font-mana text-xs pb-4 relative w-fit h-fit underline cursor-sewingHS"
+          className="font-mana text-xs pb-4 relative w-fit h-fit text-mainText underline cursor-sewingHS"
           onClick={() => window.open("https://dx402.computer")}
         >
           dx402.computer
