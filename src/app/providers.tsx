@@ -9,7 +9,8 @@ import {
 } from "react";
 import { HEART_COLORS, THEME_COLORS } from "./lib/constants";
 import { WagmiProvider, createConfig, http } from "wagmi";
-import { ConnectKitProvider, getDefaultConfig } from "connectkit";
+import { ConnectKitProvider } from "connectkit";
+import { injected } from "@wagmi/connectors";
 import { chains } from "@lens-chain/sdk/viem";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { FullScreenVideo } from "./componentes/Common/types/common.types";
@@ -30,20 +31,18 @@ export const ModalContext = createContext<
   | undefined
 >(undefined);
 
-export const config = createConfig(
-  getDefaultConfig({
-    appName: "DX.COMPUTER",
-    walletConnectProjectId: process.env
-      .NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID as string,
-    appUrl: "https://dx.computer",
-    appIcon: "https://dx.computer/favicon.ico",
-    chains: [chains.mainnet],
-    transports: {
-      [chains.mainnet.id]: http("https://rpc.lens.xyz"),
-    },
-    ssr: true,
-  })
-);
+export const config = createConfig({
+  chains: [chains.mainnet],
+  transports: {
+    [chains.mainnet.id]: http("https://rpc.lens.xyz"),
+  },
+  connectors: [
+    injected({
+      target: "metaMask",
+    }),
+  ],
+  ssr: true,
+});
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   const rewind = useRef<null | HTMLDivElement>(null);
