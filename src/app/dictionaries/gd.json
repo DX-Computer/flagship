@@ -1,0 +1,126 @@
+{
+  "common": {
+    "cc0": "100% CC0. togaidh sinn anns an raon phoblach, airson an raoin phoblaich, agus às.",
+    "bend": "NA LÙB",
+    "shop": "RACH DhAN RAON-SIUBHAIL",
+    "go": "RACH",
+    "select": "tagh cànan",
+    "soon": "a dh'aithghearr",
+    "ve": "rach",
+    "discoverT": "iomadaich",
+    "discoverD": "sruthaidh delta mar shiubhal",
+    "designT": "teannsaraich",
+    "designD": "is e na feartan an cùmhnant",
+    "distroT": "còdaich",
+    "distroD": "bheir gpus cumhachd dhan chaisead",
+    "collectT": "gnìomhaichean",
+    "collectD": "ruithidh na margaidhean cruth-atharrachaidhean",
+    "creativeT": "cruth-atharraichean",
+    "creativeD": "chan e aire a-mhàin a tha a dhìth ort",
+    "fulfillT": "gnìomhaich",
+    "fulfillD": "riochdairean air lùb x402",
+    "attestT": "dearbh",
+    "attestD": "soidhnichidh an silicon air a shon fhèin",
+    "sealT": "seul",
+    "sealD": "cuimhne crioptaichte fhad 's a ruitheas i",
+    "enclaveT": "iadhlann",
+    "enclaveD": "earbsa anns an sgealb, chan ann anns a' ghnìomhaiche",
+    "rootT": "freumh",
+    "rootD": "iuchraichean nach fhàg an sgealb a-chaoidh",
+    "realmT": "rìoghachd",
+    "realmD": "inneal slàn, dall dhan òstair aige",
+    "proveT": "dearbh",
+    "proveD": "àireamhachadh a dhearbhas tu, gun fhaicinn a-chaoidh",
+    "agents": "Daineamaigs an atharrachaidh\nair an cur an cèill ann an silicon agus air am prìseachadh ann an co-fhillteachd.",
+    "silicon": "fàsaidh dìomhaireachd na feart den bhathar-cruaidh — chan e gealladh a' bhathar-bhog.\nan earbsa anns a' ghnìomhaiche, air a chur an àite le earbsa anns an silicon.",
+    "roadmap": {
+      "label": "treòir-mhapa",
+      "mesh": "dearbhaidh na nòdan · fanaidh na h-eallaichean-obrach crioptaichte · àireamhachadh as urrainn dhut a dhearbhadh, gun fhaicinn a-chaoidh",
+      "labels": {
+        "hardware": "bathar-cruaidh",
+        "isolates": "iomallaichidh",
+        "protects": "dìonaidh",
+        "proves": "dearbhaidh",
+        "runs": "ruithidh"
+      },
+      "phases": [
+        {
+          "id": "δ0",
+          "title": "glèidheadh",
+          "status": "seulaichte",
+          "hardware": "stm32mp157f-dk2 · arm trustzone · op-tee",
+          "isolates": "aon ghnìomh — aon aplacaid earbsach",
+          "protects": "saoghal tèarainte falaichte on t-saoghal àbhaisteach agus on fhreumh",
+          "proves": "freumh-earbsa an inneil",
+          "runs": "gintinn iuchraichean, rsa + aes, eallaichean beaga",
+          "desc": "iuchraichean air am breith 's air an tìodhlacadh anns an t-saoghal thèarainte — chan fhàg iad an sgealb a-chaoidh",
+          "detail": "ginidh an saoghal tèarainte paidhir-iuchraichean rsa nach fhàg an leth phrìobhaideach gu bràth. paisgidh cliant iuchair aes fo rsa agus an eallach fo aes; fuasglaidh an sgealb 's pròiseasaidh e a h-uile càil am broinn trustzone. dìomhaireachdan beaga, freagarrach gu foirfe. crìochnaichte 's ag obair."
+        },
+        {
+          "id": "δ1",
+          "title": "dearbh-aithne",
+          "status": "beò",
+          "hardware": "stm32mp157f-dk2 · trustzone · oracle soidhnidh",
+          "isolates": "aon ghnìomh — an t-slighe soidhnidh",
+          "protects": "iuchair phrìobhaideach seulaichte on os, eadhon on fhreumh",
+          "proves": "dearbh-aithne so-dhearbhte gach inneal",
+          "runs": "soidhneadh, dearbhadh, stòradh tèarainte",
+          "desc": "gach nòd freumhaichte ann an silicon, a' soidhneadh le iuchair nach urrainn dhan ghnìomhaiche a leughadh",
+          "detail": "soidhnichidh 's dearbhaidh an nòd a dhearbh-aithne fhèin le iuchair glaiste ann an trustzone. seo far an tòisich clàr nan nòdan dìomhair — gach fear freumhaichte na shilicon fhèin."
+        },
+        {
+          "id": "δ2",
+          "title": "àireamhachadh",
+          "status": "an ath rud",
+          "hardware": "amd epyc 7003 'milan' no nas ùire · sev-snp",
+          "isolates": "vm slàn — linux iomlan",
+          "protects": "cuimhne crioptaichte gach vm; hypervisor, host os agus freumh uile dall",
+          "proves": "dearbhadh cèin freumhaichte ann am pròiseasar tèarainte amd",
+          "runs": "ffmpeg gun atharrachadh, codecs, tar-chòdachadh trom",
+          "desc": "linux iomlan seulaichte ann an cuimhne crioptaichte — obair throm, òstair dall",
+          "detail": "crioptaichidh sev-snp cuimhne an vm 's cuiridh e ionracas secure nested paging ris, mar sin ruithidh tu linux àbhaisteach le ffmpeg àbhaisteach a-staigh. tar-chòdachadh dìomhair, ann an stoidhle livepeer ach prìobhaideach. is e am ginealach as ìsle milan (epyc 7003) — tha sev aig rome agus naples ach chan eil snp. ruithidh siostam 8–16 cridhe a chaidh a chleachdadh mu thuairmeas $1.5–3k, leis fhèin 's ionadail."
+        },
+        {
+          "id": "δ3",
+          "title": "luathaich",
+          "status": "fàire",
+          "hardware": "sev-snp / intel tdx host + nvidia h100 · h200 gpu tee",
+          "isolates": "vm agus gpu ann an aon shlabhraidh earbsa",
+          "protects": "cipher-theacsa thar cuimhne cpu agus gpu, fo 7% de chosgais",
+          "proves": "thèid dearbhadh gpu còmhla ri dearbhadh an vm dhìomhair",
+          "runs": "tar-chòdachadh gpu, co-dhùnadh ai dìomhair",
+          "desc": "ruithidh modailean 's bhidio air cipher-theacsa, tha an gpu a' tighinn dhan t-slabhraidh earbsa",
+          "detail": "sìnidh àireamhachadh dìomhair air an gpu. ruithidh h100 modailean 's bhidio air dàta crioptaichte le cosgais fo 7%. seo an ìre airson ai trom agus tar-chòdachadh luathaichte le gpu gun an teacsa-shoilleir a nochdadh a-chaoidh."
+        },
+        {
+          "id": "δ4",
+          "title": "iadhlann fhosgailte",
+          "status": "fàire",
+          "hardware": "risc-v · keystone · penglai (sifive / fpga)",
+          "isolates": "iadhlann shocraichte air silicon fosgailte",
+          "protects": "tee as urrainn dhut sgrùdadh geata gu geata — gun bhogsa dubh bhon reiceadair",
+          "proves": "freumh-dearbhaidh fosgailte",
+          "runs": "an nòd dìomhair, làn-uachdranail",
+          "desc": "iadhlann as urrainn dhut sgrùdadh sìos chun a' gheata — gun bhogsa dubh bhon reiceadair",
+          "detail": "ath-thog an nòd dìomhair air tee gu tur fosgailte, gun earbsa ann an amd no intel. an dòigh as fhìor-ghlaine air uachdranas bathar-cruaidh — silicon fosgailte, iadhlann fhosgailte, dearbhadh fosgailte."
+        },
+        {
+          "id": "δ5",
+          "title": "rìoghachdan",
+          "status": "fàire",
+          "hardware": "arm cca · armv9 neoverse v2/v3 (graviton4, cobalt)",
+          "isolates": "rìoghachdan — vms dìomhair air armv9",
+          "protects": "saoghal na rìoghachd, air leth on t-saoghal àbhaisteach 's thèarainte",
+          "proves": "dearbhadh cca",
+          "runs": "ìomhaighean os gun atharrachadh am broinn rìoghachd",
+          "desc": "an t-slighe arm dùthchasach, vms dìomhair nuair a thèid an silicon a chur a-mach",
+          "detail": "ruithidh leudachadh stiùiridh nan rìoghachdan aig armv9 ìomhaighean os gun atharrachadh ann an rìoghachdan iomallaichte — leantainn nàdarrach na slighe arm a thòisich thu mar-thà. chan eil iad fhathast ann an cvms so-cheannaichte sa mhargaidh ro thoiseach 2026, ach is iad an fhàire."
+        }
+      ]
+    }
+  },
+  "404": {
+    "glitch": "tha mearachd air a bhith anns an aodach. lorg do shlighe air ais",
+    "home": "dhachaigh."
+  }
+}

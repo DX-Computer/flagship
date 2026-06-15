@@ -7,7 +7,7 @@ const useHeader = () => {
   const router = useRouter();
   const [videoLoading, setVideoLoading] = useState<boolean>(false);
   const [chosenLanguage, setChosenLanguage] = useState<number>(
-    idiomaAIndice[(path.match(/(?<=\/)(en|es)(?=\/)/)?.[0] ?? "en") as Idiomas]
+    idiomaAIndice[(decodeURIComponent(path.split("/")[1] ?? "") || "en") as Idiomas] ?? 0
   );
 
   const changeLanguage = (lang: string) => {

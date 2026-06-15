@@ -25,6 +25,23 @@ export type HeaderProps = {
   dict: any;
 };
 
+export type RoadmapPhase = {
+  id: string;
+  title: string;
+  status: string;
+  hardware: string;
+  isolates: string;
+  protects: string;
+  proves: string;
+  runs: string;
+  desc: string;
+  detail: string;
+};
+
+export type RoadmapProps = {
+  dict: any;
+};
+
 export interface FullScreenVideo {
   open: boolean;
   time?: number;

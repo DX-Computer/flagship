@@ -1,159 +1,186 @@
 @import "tailwindcss";
 
 @font-face {
+  font-display: swap;
   font-family: "Neco";
   font-weight: 400;
   src: url("/fonts/NecoMedium.otf");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "Stardom";
   font-weight: 400;
   src: url("/fonts/StardomRegular.otf");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "Chillax";
   font-weight: 400;
   src: url("/fonts/ChillaxMedium.otf");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "Letter Magic";
   font-weight: 400;
   src: url("/fonts/Letter Magic.ttf");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "Dos";
   font-weight: 400;
   src: url("/fonts/Dos.ttf");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "Grav";
   font-weight: 400;
   src: url("/fonts/Gravity.otf");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "Abaddon";
   font-weight: 400;
   src: url("/fonts/abaddon.ttf");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "Nerd Semi";
   font-weight: 400;
   src: url("/fonts/3270NerdFont-SemiCondensed.ttf");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "Bit Potion";
   src: url("/fonts/BitPotion.ttf");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "Austral";
   src: url("/fonts/Austral.otf");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "Vcr";
   src: url("/fonts/Vcr.ttf");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "Manaspace";
   font-weight: 400;
   src: url("/fonts/Manaspace.ttf");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "Dosis Regular";
   font-weight: 400;
   src: url("/fonts/DosisRegular.ttf");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "Fira Bold";
   font-weight: 400;
   src: url("/fonts/FiraCode-Bold.ttf");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "Fira Regular";
   font-weight: 400;
   src: url("/fonts/FiraCode-Regular.ttf");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "Internal Rainbows";
   font-weight: 400;
   src: url("/fonts/Internal Rainbows.otf");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "Fira Medium";
   font-weight: 400;
   src: url("/fonts/FiraCode-Medium.ttf");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "Bitblox";
   font-weight: 400;
   src: url("/fonts/Bitblox.otf");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "Fira Light";
   font-weight: 400;
   src: url("/fonts/FiraCode-Light.ttf");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "Liberation Mono";
   font-weight: 400;
   src: url("/fonts/LiberationMono-Regular.ttf");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "Liberation Mono Bold";
   font-weight: 400;
   src: url("/fonts/LiberationMono-Bold.ttf");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "FH Giselle Light";
   font-weight: 400;
   src: url("/fonts/FHGiselle-Light.ttf");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "A Love of Thunder";
   font-weight: 400;
   src: url("/fonts/A Love of Thunder.ttf");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "Futurist";
   font-weight: 400;
   src: url("/fonts/Futurist Fixed-width Regular.ttf");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "Audimat";
   font-weight: 400;
   src: url("/fonts/AUdimat Regular.ttf");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "Jack Lane";
   font-weight: 400;
   src: url("/fonts/jacklane_2.woff");
 }
 
 @font-face {
+  font-display: swap;
   font-family: "Retro";
   font-weight: 400;
   src: url("/fonts/Retro.ttf");
@@ -164,44 +191,44 @@
   --font-super: 0.46rem;
   --font-xxs: 0.6rem;
 
-  --font-nerd: "Nerd Semi";
-  --font-york: "New York";
-  --font-air: "Air Strike";
-  --font-emiken: "Emiken";
-  --font-atmos: "Atmosphere";
-  --font-alber: "Alberto";
-  --font-glitch: "Doctor Glitch";
-  --font-conso: "Conso Regular";
-  --font-consoM: "Conso Medium";
-  --font-gaia: "Gaia";
-  --font-fira: "Fira Regular";
-  --font-firaL: "Fira Light";
-  --font-firaB: "Fira Bold";
-  --font-retro: "Retro";
-  --font-firaM: "Fira Medium";
-  --font-din: "DIN Condensed";
-  --font-futur: "Futurist";
-  --font-mag: "Letter Magic";
-  --font-rain: "Internal Rainbows";
-  --font-lib: "Liberation Mono";
-  --font-libB: "Liberation Mono Bold";
-  --font-gisL: "FH Giselle Light";
-  --font-thun: "A Love of Thunder";
-  --font-fut: "Futurist";
-  --font-aud: "Audimat";
-  --font-jacklane: "Jack Lane";
-  --font-dosis: "Dosis Regular";
-  --font-mana: "Manaspace";
-  --font-vcr: "Vcr";
-  --font-bit: "Bitblox";
-  --font-aust: "Austral";
-  --font-pot: "Bit Potion";
-  --font-dos: "Dos";
-  --font-abd: "Abaddon";
-  --font-grav: "Grav";
-  --font-star: "Stardom";
-  --font-neco: "Neco";
-  --font-chill: "Chillax";
+  --font-nerd: "Nerd Semi", sans-serif;
+  --font-york: "New York", sans-serif;
+  --font-air: "Air Strike", sans-serif;
+  --font-emiken: "Emiken", sans-serif;
+  --font-atmos: "Atmosphere", sans-serif;
+  --font-alber: "Alberto", sans-serif;
+  --font-glitch: "Doctor Glitch", sans-serif;
+  --font-conso: "Conso Regular", sans-serif;
+  --font-consoM: "Conso Medium", sans-serif;
+  --font-gaia: "Gaia", sans-serif;
+  --font-fira: "Fira Regular", sans-serif;
+  --font-firaL: "Fira Light", sans-serif;
+  --font-firaB: "Fira Bold", sans-serif;
+  --font-retro: "Retro", sans-serif;
+  --font-firaM: "Fira Medium", sans-serif;
+  --font-din: "DIN Condensed", sans-serif;
+  --font-futur: "Futurist", sans-serif;
+  --font-mag: "Letter Magic", sans-serif;
+  --font-rain: "Internal Rainbows", sans-serif;
+  --font-lib: "Liberation Mono", monospace;
+  --font-libB: "Liberation Mono Bold", monospace;
+  --font-gisL: "FH Giselle Light", sans-serif;
+  --font-thun: "A Love of Thunder", sans-serif;
+  --font-fut: "Futurist", sans-serif;
+  --font-aud: "Audimat", sans-serif;
+  --font-jacklane: "Jack Lane", sans-serif;
+  --font-dosis: "Dosis Regular", sans-serif;
+  --font-mana: "Manaspace", sans-serif;
+  --font-vcr: "Vcr", sans-serif;
+  --font-bit: "Bitblox", sans-serif;
+  --font-aust: "Austral", sans-serif;
+  --font-pot: "Bit Potion", sans-serif;
+  --font-dos: "Dos", sans-serif;
+  --font-abd: "Abaddon", sans-serif;
+  --font-grav: "Grav", sans-serif;
+  --font-star: "Stardom", sans-serif;
+  --font-neco: "Neco", sans-serif;
+  --font-chill: "Chillax", sans-serif;
 
   --color-offBlack: #111313;
   --color-offBlue: #01030c;

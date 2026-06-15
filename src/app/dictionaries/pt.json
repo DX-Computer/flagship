@@ -1,0 +1,114 @@
+{
+  "common": {
+    "cc0": "100% CC0. construímos no, para e a partir do domínio público.",
+    "bend": "NÃO DOBRAR",
+    "shop": "IR PARA A RUNWAY",
+    "go": "IR",
+    "select": "selecionar idioma",
+    "soon": "em breve",
+    "ve": "ir",
+    "discoverT": "atestar",
+    "discoverD": "o silício assina por si mesmo",
+    "designT": "selar",
+    "designD": "memória criptografada enquanto executa",
+    "distroT": "enclave",
+    "distroD": "prova do chip",
+    "collectT": "raiz",
+    "collectD": "chaves que nunca deixam o die",
+    "creativeT": "domínio",
+    "creativeD": "uma máquina inteira, cega ao seu host",
+    "fulfillT": "provar",
+    "fulfillD": "computação que você verifica, nunca vê",
+    "agents": "dinâmica da mudança\nexpressa em silício e precificada em convexidade.",
+    "silicon": "confidencialidade torna-se uma propriedade do hardware — não uma promessa do software.\na palavra do operador, substituída pela prova do silício.",
+    "roadmap": {
+      "label": "soldando computação confidencial de os",
+      "mesh": "nós atestam · cargas de trabalho permanecem criptografadas · computação zk",
+      "labels": {
+        "hardware": "hardware",
+        "isolates": "isola",
+        "protects": "sela",
+        "proves": "prova",
+        "runs": "executa"
+      },
+      "phases": [
+        {
+          "id": "δ0",
+          "title": "o ciclo",
+          "status": "sealed",
+          "hardware": "stm32mp157f-dk2 · arm trustzone · op-tee",
+          "isolates": "uma única função — um app confiável",
+          "protects": "secure world oculto do normal world e do root",
+          "proves": "raiz de confiança do dispositivo",
+          "runs": "geração de chaves, rsa + aes, pequenas cargas úteis",
+          "desc": "dentro do secure world, um frame recebido é descriptografado, invertido e retornado; o par de chaves é gerado on-die.",
+          "detail": "o secure world gera um par de chaves rsa e mantém a metade privada on-die. o cliente envolve uma chave aes sob rsa e o frame sob aes; dentro do trustzone ambos são desembrulhados, o frame descriptografado, invertido e retornado. o loop criptografar-processar-retornar roda de ponta a ponta na placa."
+        },
+        {
+          "id": "δ1",
+          "title": "o anônimo",
+          "status": "live",
+          "hardware": "stm32mp157f-dk2 · trustzone · ftpm",
+          "isolates": "o código do agente — um app confiável",
+          "protects": "o código e a chave do agente, selados on-die",
+          "proves": "código genuíno em hardware genuíno — anonimamente",
+          "runs": "um agente, atestação anônima, assinaturas de grupo",
+          "desc": "um agente cujo código o hardware prova ser genuíno e inalterado. comportamento verificável, operador anônimo.",
+          "detail": "o agente é selado no secure world e assina suas saídas com uma chave trancada on-die. sob desafio, ele prova qual código executa e que o chip é genuíno, usando atestação anônima: confirmação de que um nó real roda exatamente este código, sem revelar qual nó ou quem o opera. o código e o hardware são verificados, nunca uma identidade."
+        },
+        {
+          "id": "δ2",
+          "title": "a caixa",
+          "status": "next",
+          "hardware": "amd epyc 7003 'milan' · sp3 board · ecc rdimm · sev-snp",
+          "isolates": "uma vm inteira — um linux completo",
+          "protects": "memória criptografada por vm; hypervisor, host os e root todos cegos",
+          "proves": "atestação remota enraizada no amd secure processor",
+          "runs": "ffmpeg não modificado, codecs, transcodificação pesada",
+          "desc": "um linux inteiro roda em memória criptografada pela cpu; o host lê apenas texto cifrado.",
+          "detail": "sev-snp criptografa toda a memória da vm em hardware e adiciona secure nested paging para integridade. um linux normal com ffmpeg normal ou um servidor de modelos roda dentro; o hypervisor, o host os e o root veem apenas texto cifrado. o mínimo é milan (epyc 7003) — rome e naples têm sev mas não snp."
+        },
+        {
+          "id": "δ3",
+          "title": "a gpu",
+          "status": "horizon",
+          "hardware": "amd epyc 7003 'milan' · sev-snp · nvidia h100 · h200 · gpu tee",
+          "isolates": "vm e gpu em uma única cadeia de confiança",
+          "protects": "texto cifrado através da memória de cpu e gpu",
+          "proves": "a atestação da gpu junta-se à da vm confidencial",
+          "runs": "transcodificação de vídeo criptografado, distribuída entre nós",
+          "desc": "vídeo criptografado é transcodificado na gpu dentro do enclave e retornado como texto cifrado; o trabalho se distribui entre nós, nenhum vendo o conteúdo.",
+          "detail": "o vídeo chega como texto cifrado e é descriptografado apenas dentro do enclave da gpu, transcodificado ali e recriptografado antes de sair. o mesmo trabalho se espalha por uma rede descentralizada de nós; em cada um o texto plano existe apenas dentro do enclave."
+        },
+        {
+          "id": "δ4",
+          "title": "o enxame",
+          "status": "horizon",
+          "hardware": "nós confidenciais (δ0–δ3) · em rede",
+          "isolates": "um trabalho por enclave, por nó",
+          "protects": "toda entrada, saída e carga de trabalho como texto cifrado",
+          "proves": "todo nó atesta antes de aceitar um trabalho",
+          "runs": "trabalhos criptografados, distribuídos; nada retido",
+          "desc": "trabalhos criptografados rodam por uma rede de nós confidenciais; cada um retorna apenas o resultado que o cliente pediu e apaga todo o resto.",
+          "detail": "um trabalho entra como texto cifrado, roda dentro de um enclave em qualquer nó que o aceite, e retorna apenas o que o cliente precisa. entradas, estado intermediário e a memória do agente são apagados quando o trabalho termina. o trabalho se espalha pela rede, e nenhum nó retém o conteúdo."
+        },
+        {
+          "id": "δ5",
+          "title": "o misturador",
+          "status": "horizon",
+          "hardware": "o enxame (δ4) · on-chain",
+          "isolates": "o vínculo entre remetente, executor e pagador",
+          "protects": "pagamentos, roteamento e chamadas on-chain, todos não vinculáveis",
+          "proves": "validade por prova de conhecimento zero, nenhuma identidade revelada",
+          "runs": "pagamentos anônimos, roteamento e chamadas on-chain",
+          "desc": "um zk mixer quebra o vínculo entre quem submete um trabalho, quem o executa e quem paga; chamadas on-chain são anonimizadas da mesma forma.",
+          "detail": "provas de conhecimento zero substituem a identidade: a validade de um trabalho, um pagamento, uma chamada on-chain são provados sem revelar quem os fez. um pool de mistura reroteia valor e requisições para que remetente, executor e pagador permaneçam não vinculáveis. funções on-chain passam pela mesma camada e também são anonimizadas."
+        }
+      ]
+    }
+  },
+  "404": {
+    "glitch": "houve uma falha na trama. encontre o caminho de volta",
+    "home": "início."
+  }
+}

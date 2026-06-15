@@ -28,7 +28,7 @@ const Header: FunctionComponent<HeaderProps> = ({ dict }): JSX.Element => {
         setVideoLoading={setVideoLoading}
         videoLoading={videoLoading}
       />
-      <div className="font-mag w-full flex h-fit text-[16vw] relative items-center justify-center">
+      <div className="font-mag w-full flex h-fit text-[16vw] relative items-center justify-center" dir="ltr">
         <Type />
       </div>
     </div>

@@ -2,6 +2,7 @@ import {
   idiomaAImagen,
   Idiomas,
   indiceAIdioma,
+  indiceASimbolo,
   INFURA_GATEWAY_INTERNAL,
 } from "@/app/lib/constants";
 import { ModalContext } from "@/app/providers";
@@ -31,7 +32,10 @@ const Bar: FunctionComponent<BarProps> = ({
             <div className="text-base flex items-center justify-center">
               {dict?.common?.select}
             </div>
-            <div className="relative w-fit h-fit flex items-center justify-center flex-row gap-2">
+            <div
+              dir="ltr"
+              className="relative w-fit h-fit flex items-center justify-center flex-row gap-2"
+            >
               <div
                 className="relative flex items-center justify-center w-fit h-fit active:scale-95 cursor-sewingHS"
                 onClick={() =>
@@ -43,7 +47,7 @@ const Bar: FunctionComponent<BarProps> = ({
                 <PiArrowFatLinesLeftFill size={20} />
               </div>
               <div className="relative w-fit h-fit flex items-center justify-center">
-                {indiceAIdioma[chosenLanguage]}
+                {indiceASimbolo[chosenLanguage]}
               </div>
               <div
                 className="relative flex items-center justify-center w-fit h-fit active:scale-95 cursor-sewingHS"
@@ -58,17 +62,17 @@ const Bar: FunctionComponent<BarProps> = ({
             </div>
             <div
               onClick={() => {
-                if (chosenLanguage === 0 || chosenLanguage === 1) {
+                if ([0, 1, 2, 4, 9].includes(chosenLanguage)) {
                   changeLanguage(indiceAIdioma[chosenLanguage]);
                 }
               }}
               className={`text-xxs flex items-center justify-center px-2 border border-mainText rounded-sm h-6 w-full ${
-                (chosenLanguage === 0 || chosenLanguage === 1) &&
+                [0, 1, 2, 4, 9].includes(chosenLanguage) &&
                 "cursor-sewingHS active:scale-95"
               }`}
             >
               ~*{" "}
-              {chosenLanguage !== 0 && chosenLanguage !== 1
+              {![0, 1, 2, 4, 9].includes(chosenLanguage)
                 ? dict?.common?.soon
                 : dict?.common?.ve}{" "}
               *~
@@ -125,7 +129,7 @@ const Bar: FunctionComponent<BarProps> = ({
             {dict?.common?.bend}
           </div>
         </div>
-        <div className="relative w-96 h-9 rounded-r-md text-sm overflow-x-hidden whitespace-nowrap flex items-center justify-center text-offBlack">
+        <div className="relative w-96 h-9 rounded-r-md text-sm overflow-x-hidden whitespace-nowrap flex items-center justify-center text-offBlack" dir="ltr">
           <div className="absolute w-full h-full top-0 left-0 z-0 flex items-center justify-center border-y border-r border-mainText bg-white rounded-r-md">
             <Marquee
               className="z-0"
@@ -134,13 +138,13 @@ const Bar: FunctionComponent<BarProps> = ({
               gradient={false}
             >
               {" "}
-              {`${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉`}{" "}
+              {`${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉`} {`${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉`} {`${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉`} {`${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉 ${dict?.common?.shop} ❤️ 👉`}{" "}
             </Marquee>
           </div>
           <div
             className="relative w-full h-full cursor-sewingHS bg-gradient-to-r from-mainBg via-transparent flex items-center justify-center rounded-r-md to-transparent"
             onClick={() => {
-              window.open("https://triplea.agentmeme.xyz/gallery")
+              window.open("https://runway.globaldesignernetwork.com")
             }}
           ></div>
         </div>

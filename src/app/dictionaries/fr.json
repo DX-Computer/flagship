@@ -1,0 +1,114 @@
+{
+  "common": {
+    "cc0": "100% cc0. nous construisons dans, pour et depuis le domaine public.",
+    "bend": "ne pas plier",
+    "shop": "aller au runway",
+    "go": "aller",
+    "select": "choisir la langue",
+    "soon": "bientôt",
+    "ve": "aller",
+    "discoverT": "attester",
+    "discoverD": "le silicium signe pour lui-même",
+    "designT": "sceller",
+    "designD": "mémoire chiffrée pendant son exécution",
+    "distroT": "enclave",
+    "distroD": "la preuve vient de la puce",
+    "collectT": "racine",
+    "collectD": "des clés qui ne quittent jamais la puce",
+    "creativeT": "royaume",
+    "creativeD": "une machine entière, aveugle à son hôte",
+    "fulfillT": "prouver",
+    "fulfillD": "un calcul que vous vérifiez, sans jamais le voir",
+    "agents": "dynamique du changement\nexprimée dans le silicium et tarifée en convexité.",
+    "silicon": "la confidentialité devient une propriété du matériel — et non une promesse du logiciel.\nla parole de l'opérateur, remplacée par la preuve du silicium.",
+    "roadmap": {
+      "label": "soudure de l'informatique confidentielle au niveau os",
+      "mesh": "les nœuds attestent · les charges restent chiffrées · calcul zk",
+      "labels": {
+        "hardware": "matériel",
+        "isolates": "isole",
+        "protects": "scelle",
+        "proves": "prouve",
+        "runs": "exécute"
+      },
+      "phases": [
+        {
+          "id": "δ0",
+          "title": "la boucle",
+          "status": "scellé",
+          "hardware": "stm32mp157f-dk2 · arm trustzone · op-tee",
+          "isolates": "une seule fonction — une seule application de confiance",
+          "protects": "le monde sécurisé caché du monde normal et de root",
+          "proves": "racine de confiance de l'appareil",
+          "runs": "génération de clés, rsa + aes, petites charges utiles",
+          "desc": "à l'intérieur du monde sécurisé, une trame entrante est déchiffrée, inversée et renvoyée ; la paire de clés générée sur la puce.",
+          "detail": "le monde sécurisé génère une paire de clés rsa et conserve la moitié privée on-die. le client enveloppe une clé aes sous rsa et la trame sous aes ; à l'intérieur de trustzone les deux sont déballés, la trame déchiffrée, inversée et renvoyée. la boucle chiffrer-traiter-renvoyer s'exécute de bout en bout sur la carte."
+        },
+        {
+          "id": "δ1",
+          "title": "l'anonyme",
+          "status": "en ligne",
+          "hardware": "stm32mp157f-dk2 · trustzone · ftpm",
+          "isolates": "le code de l'agent — une seule application de confiance",
+          "protects": "le code et la clé de l'agent, scellés on-die",
+          "proves": "du code authentique sur du matériel authentique — anonymement",
+          "runs": "un agent, attestation anonyme, signatures de groupe",
+          "desc": "un agent dont le matériel prouve que le code est authentique et inaltéré. comportement vérifiable, opérateur anonyme.",
+          "detail": "l'agent est scellé dans le monde sécurisé et signe ses sorties avec une clé verrouillée on-die. sur défi, il prouve quel code il exécute et que la puce est authentique, en utilisant l'attestation anonyme : la confirmation qu'un vrai nœud exécute exactement ce code, sans révéler quel nœud ni qui l'exploite. le code et le matériel sont vérifiés, jamais une identité."
+        },
+        {
+          "id": "δ2",
+          "title": "la boîte",
+          "status": "à venir",
+          "hardware": "amd epyc 7003 'milan' · sp3 board · ecc rdimm · sev-snp",
+          "isolates": "une vm entière — un linux complet",
+          "protects": "mémoire chiffrée par vm ; hypervisor, host os et root tous aveugles",
+          "proves": "remote attestation enracinée dans le amd secure processor",
+          "runs": "ffmpeg non modifié, codecs, transcodage lourd",
+          "desc": "un linux entier s'exécute dans une mémoire chiffrée par le cpu ; l'host ne lit que du texte chiffré.",
+          "detail": "sev-snp chiffre l'intégralité de la mémoire de la vm dans le matériel et ajoute le secure nested paging pour l'intégrité. un linux normal avec un ffmpeg normal ou un serveur de modèle s'exécute à l'intérieur ; l'hypervisor, l'host os et root ne voient que du texte chiffré. le minimum est milan (epyc 7003) — rome et naples ont sev mais pas snp."
+        },
+        {
+          "id": "δ3",
+          "title": "le gpu",
+          "status": "horizon",
+          "hardware": "amd epyc 7003 'milan' · sev-snp · nvidia h100 · h200 · gpu tee",
+          "isolates": "vm et gpu dans une seule chaîne de confiance",
+          "protects": "texte chiffré à travers la mémoire cpu et gpu",
+          "proves": "l'attestation du gpu rejoint celle de la vm confidentielle",
+          "runs": "transcodage vidéo chiffré, distribué entre les nœuds",
+          "desc": "la vidéo chiffrée est transcodée sur le gpu à l'intérieur de l'enclave et renvoyée sous forme de texte chiffré ; le travail se distribue entre les nœuds, aucun ne voyant le contenu.",
+          "detail": "la vidéo arrive sous forme de texte chiffré et n'est déchiffrée qu'à l'intérieur de l'enclave gpu, transcodée là, puis re-chiffrée avant de la quitter. le même travail se répartit sur un réseau décentralisé de nœuds ; sur chacun, le texte en clair n'existe qu'à l'intérieur de l'enclave."
+        },
+        {
+          "id": "δ4",
+          "title": "l'essaim",
+          "status": "horizon",
+          "hardware": "nœuds confidentiels (δ0–δ3) · en réseau",
+          "isolates": "un travail par enclave, par nœud",
+          "protects": "chaque entrée, sortie et charge comme texte chiffré",
+          "proves": "chaque nœud atteste avant de prendre un travail",
+          "runs": "travaux chiffrés, distribués ; rien n'est conservé",
+          "desc": "des travaux chiffrés s'exécutent sur un réseau de nœuds confidentiels ; chacun ne renvoie que le résultat demandé par le client et efface tout le reste.",
+          "detail": "un travail entre sous forme de texte chiffré, s'exécute à l'intérieur d'une enclave sur le nœud qui le prend, et ne renvoie que ce dont le client a besoin. les entrées, l'état intermédiaire et la mémoire de l'agent sont effacés à la fin du travail. le travail se répartit sur le réseau, et aucun nœud ne conserve le contenu."
+        },
+        {
+          "id": "δ5",
+          "title": "le mélangeur",
+          "status": "horizon",
+          "hardware": "l'essaim (δ4) · on-chain",
+          "isolates": "le lien entre l'expéditeur, l'exécutant et le payeur",
+          "protects": "paiements, routage et appels on-chain, tous non-corrélables",
+          "proves": "la validité par preuve à divulgation nulle, aucune identité révélée",
+          "runs": "paiements anonymes, routage et appels on-chain",
+          "desc": "un mélangeur zk brise le lien entre celui qui soumet un travail, celui qui l'exécute et celui qui paie ; les appels on-chain sont anonymisés de la même façon.",
+          "detail": "les preuves à divulgation nulle remplacent l'identité : la validité d'un travail, un paiement, un appel on-chain sont prouvés sans révéler qui les a faits. un pool de mélange re-route la valeur et les requêtes pour que l'expéditeur, l'exécutant et le payeur restent non-corrélables. les fonctions on-chain passent par la même couche et sont anonymisées elles aussi."
+        }
+      ]
+    }
+  },
+  "404": {
+    "glitch": "il y a eu un accroc dans la trame. retrouvez votre chemin",
+    "home": "accueil."
+  }
+}

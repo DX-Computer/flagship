@@ -1,0 +1,127 @@
+{
+  "common": {
+    "cc0": "100% CC0. Ŋali djäma ŋunhi public domain-ŋur, ga ŋayathamana, ga waŋganydhu.",
+    "bend": "YAKA DHUKARRŊU",
+    "shop": "MARRTJINA RUNWAY-LIL",
+    "go": "MARRTJINA",
+    "select": "ḻakaranhamana matha",
+    "soon": "yana",
+    "ve": "marrtjina",
+    "discoverT": "yarrupthuna",
+    "discoverD": "delta marrtjina nhakun rärr",
+    "designT": "tensorize",
+    "designD": "features ŋunhi dhäwu-ŋur",
+    "distroT": "encode",
+    "distroD": "GPU-y guḻkthun gradient",
+    "collectT": "operators",
+    "collectD": "markets djäma transforms",
+    "creativeT": "transformers",
+    "creativeD": "attention yaka waṉḏapuy beŋur nhe djäl",
+    "fulfillT": "actuate",
+    "fulfillD": "agents x402-ŋur ŋoy-yun",
+    "attestT": "attest",
+    "attestD": "silicon-dhu signum ŋayathamana ŋayinydja",
+    "sealT": "seal",
+    "sealD": "memory encrypted ŋunhi djäma-ŋur",
+    "enclaveT": "enclave",
+    "enclaveD": "djäl chip-gal, yaka operator-gal",
+    "rootT": "root",
+    "rootD": "keys ŋunhi yaka marrtji die-ŋur beŋur",
+    "realmT": "realm",
+    "realmD": "waŋganydja machine, ḏapmaranhamina host-wal",
+    "proveT": "prove",
+    "proveD": "compute nhe märr-rom, yaka nhäma",
+    "agents": "Rom-rom dharaŋanmina\nḻakaranhamina silicon-ŋur ga märr-priced convexity-ŋur.",
+    "silicon": "confidentiality dhärran hardware-puy — yaka dhäruk software-puy.\ndjäl operator-gal, märr-ŋamathina djäl silicon-gal.",
+    "roadmap": {
+      "label": "roadmap",
+      "thesis": "djäl marrtjina operator-ŋur silicon-lil.\nconfidentiality dhärran hardware-puy, yaka dhäruk software-puy.",
+      "mesh": "nodes attest · workloads dhärran encrypted · compute nhe märr-rom, yaka nhäma",
+      "labels": {
+        "hardware": "hardware",
+        "isolates": "guḻkthun",
+        "protects": "ŋayathamana",
+        "proves": "märr-rom",
+        "runs": "djäma"
+      },
+      "phases": [
+        {
+          "id": "δ0",
+          "title": "ŋayathamana",
+          "status": "sealed",
+          "hardware": "stm32mp157f-dk2 · arm trustzone · op-tee",
+          "isolates": "waŋganydja function — waŋganydja djäl app",
+          "protects": "secure world ḏapmaranhamina normal world-wal ga root-wal",
+          "proves": "device root of trust",
+          "runs": "key generation, rsa + aes, yindi-mirri payloads",
+          "desc": "keys ŋäthili ga dhuwala secure world-ŋur — yaka marrtji die-ŋur beŋur",
+          "detail": "secure world-dhu djäma rsa keypair ŋunhi private-mirri yaka marrtji beŋur. client-dhu wrapum aes key rsa-ŋur ga payload aes-ŋur; chip-dhu unwrapum ga djäma waŋganydja trustzone-ŋur. yindi-mirri secrets, ŋamathina dhärran. djäma ga djämaŋur."
+        },
+        {
+          "id": "δ1",
+          "title": "identity",
+          "status": "live",
+          "hardware": "stm32mp157f-dk2 · trustzone · signing oracle",
+          "isolates": "waŋganydja function — signing path",
+          "protects": "private key sealed os-wal, ga root-wal",
+          "proves": "per-device attestable identity",
+          "runs": "signing, authentication, secure storage",
+          "desc": "djinawa node dhärran silicon-ŋur, signing key-dhu ŋunhi operator yaka märram",
+          "detail": "node-dhu signum ga attestum ŋayinydja identity key-dhu ŋunhi locked trustzone-ŋur. dhuwala wäŋa registry confidential nodes-puy ŋäthili — djinawa waŋganydja dhärran ŋayinydja silicon-ŋur."
+        },
+        {
+          "id": "δ2",
+          "title": "compute",
+          "status": "next",
+          "hardware": "amd epyc 7003 'milan' wala yutaŋur · sev-snp",
+          "isolates": "waŋganydja vm — waŋganydja linux",
+          "protects": "per-vm encrypted memory; hypervisor, host os ga root djinawa ḏapmaranhamina",
+          "proves": "remote attestation dhärran amd secure processor-ŋur",
+          "runs": "unmodified ffmpeg, codecs, yindi-mirri transcoding",
+          "desc": "waŋganydja linux sealed encrypted memory-ŋur — yindi djäma, ḏapmaranhamina host",
+          "detail": "sev-snp-dhu encryptum vm memory ga ŋamathina secure nested paging integrity, ga nhe djäma normal linux normal ffmpeg-dhu walalaŋ. confidential transcoding, livepeer-nhakun yana private. minimum generation milan (epyc 7003) — rome ga naples ŋayathama sev yaka snp. yutju 8–16 core system djäma yana $1.5–3k, ŋayathamina ga local."
+        },
+        {
+          "id": "δ3",
+          "title": "accelerate",
+          "status": "horizon",
+          "hardware": "sev-snp / intel tdx host + nvidia h100 · h200 gpu tee",
+          "isolates": "vm ga gpu waŋganydja chain of trust-ŋur",
+          "protects": "ciphertext cpu ga gpu memory-ŋur, 7% beŋur yindi-mirri overhead",
+          "proves": "gpu attestation ŋoyŋ-ŋamathina confidential vm-gal",
+          "runs": "gpu transcoding, confidential ai inference",
+          "desc": "models ga video djäma ciphertext-ŋur, gpu ŋoyŋ-ŋamathina chain of trust-lil",
+          "detail": "confidential computing marrtjina gpu-lil. h100-dhu djäma models ga video encrypted data-ŋur 7%-beŋur overhead. dhuwala tier yindi ai ga gpu-accelerated transcoding ŋunhi yaka nhäma plaintext."
+        },
+        {
+          "id": "δ4",
+          "title": "open enclave",
+          "status": "horizon",
+          "hardware": "risc-v · keystone · penglai (sifive / fpga)",
+          "isolates": "configurable enclave open silicon-ŋur",
+          "protects": "tee ŋunhi nhe audit gate-ŋur gate-lil — yaka vendor black box",
+          "proves": "open attestation root",
+          "runs": "confidential node, djinawa ŋayathamina",
+          "desc": "enclave ŋunhi nhe audit gate-lil — yaka vendor black box",
+          "detail": "djäma yuta confidential node fully open tee-ŋur, yaka djäl amd wala intel. ŋamathina-mirri ḻakaranhamina hardware sovereignty — open silicon, open enclave, open attestation."
+        },
+        {
+          "id": "δ5",
+          "title": "realms",
+          "status": "horizon",
+          "hardware": "arm cca · armv9 neoverse v2/v3 (graviton4, cobalt)",
+          "isolates": "realms — confidential vms armv9-ŋur",
+          "protects": "realm world, gakal normal ga secure worlds-wal",
+          "proves": "cca attestation",
+          "runs": "unmodified os images waŋganydja realm-ŋur",
+          "desc": "native arm dhukarr, confidential vms ŋunhi silicon marrtjina",
+          "detail": "armv9 realm management extension-dhu djäma unmodified os images isolated realms-ŋur — natural marrtjina arm dhukarr ŋunhi nhe ŋäthili ŋäthili. yaka buyable production cvms-ŋur early 2026-ŋur, yurru horizon."
+        }
+      ]
+    }
+  },
+  "404": {
+    "glitch": "Glitch ŋunhi fabric-ŋur. Marrtjina dhukarr ḏiltjipa",
+    "home": "wäŋa."
+  }
+}

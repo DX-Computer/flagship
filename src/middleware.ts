@@ -2,7 +2,8 @@ import { match } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 import { NextRequest, NextResponse } from "next/server";
 
-let locales = ["en", "es"];
+let locales = ["en", "es", "ar", "pt", "fr"];
+let localeSegments = ["en", "es", "ar", "pt", "fr"];
 let defaultLocale = "en";
 
 function getLocale(request: NextRequest) {
@@ -25,7 +26,7 @@ function isBot(userAgent: string) {
 }
 
 export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const pathname = decodeURIComponent(request.nextUrl.pathname);
   const userAgent = request.headers.get("user-agent") || "";
 
   if (
@@ -42,7 +43,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const pathnameHasLocale = locales.some(
+  const pathnameHasLocale = localeSegments.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
 
