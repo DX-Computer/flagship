@@ -1,110 +1,149 @@
 {
   "common": {
     "cc0": "100% CC0. We build in, for, and from the public domain.",
-    "bend": "DO NOT BEND",
     "shop": "GO TO RUNWAY",
     "go": "GO",
     "select": "select language",
     "soon": "soon",
     "ve": "go",
-    "discoverT": "attest",
-    "discoverD": "the silicon signs for itself",
+    "discoverT": "fab",
+    "discoverD": "layer by layer",
     "designT": "seal",
-    "designD": "memory encrypted while it runs",
+    "designD": "computed sealed",
     "distroT": "enclave",
-    "distroD": "proof from the chip",
+    "distroD": "walled chip regions",
     "collectT": "root",
-    "collectD": "keys that never leave the die",
+    "collectD": "keys born on the die",
     "creativeT": "realm",
-    "creativeD": "a whole machine, blind to its host",
+    "creativeD": "encrypted os",
     "fulfillT": "prove",
-    "fulfillD": "compute you verify, never see",
+    "fulfillD": "a zk reading",
     "agents": "Dynamics of change\nexpressed in silicon and priced in convexity.",
-    "silicon": "confidentiality becomes a property of the hardware — not a promise of the software.\nthe operator's word, replaced by the silicon's proof.",
+    "silicon": "confidential at rest, in transit, and in use — computed whole, on public silicon. degrees of freedom you exercise, leverage you widen, dependencies that never take hold. locally complete, networked across trillions of entrances and exits, each identity shifting, severed, and ephemeral.",
+    "thesis": "Distribution is not automatically decentralization. Distributing work across machines you don't own and can't see into only relocates the center. Each operator holds, in the clear, whatever their machine runs, so control, visibility, and leverage collect wherever the work lands — in the operators, the nodes, and in the chip vendor when attestation sits in the path. This is centralized distribution: the same concentration of power, call it neo-feudal, neo-monarchist, just spread across more locations. A whack-a-mole of centers. More masters. More overseers. Most systems that call themselves decentralized are built this way.\n\nDecentralization is degrees of freedom held at once, at least two, usually many more.\n\nFree alone — you can run and rebuild all of it yourself, and no one can lock you out. This is what the building blocks give: open software, open hardware, maps and kits to rebuild, matroidic privacy. Sovereignty.\n\nFree when connected — you can join the network, exposure and dependencies don't build, and the exits and entrances are plentiful, minute, and never locked.\n\nA rebuildable, transparent stack spans the first freedom. It spans nothing of the second. To do anything now, you connect — no man is an island — and connection seems to never be neutral: the moment what you're doing runs on someone else's machine, openness does nothing to keep that operator and intermediates from taking it in the clear. The other side builds dependencies.\n\nConfidential computing spans the second freedom. It is what lets you connect with nothing to violate: a machine can run what you're doing, and there is nothing to take. Not hidden, simply never there in a form anyone could use. Nothing along the full path gains leverage. No dependency forms. The machine is a confidential node — distribution that builds no new center.\n\nEmphasizing the descent to the silicon, you then have the option to be your own fab: a chip fab, a hardware fab, a software fab. It is a capacity that sits at every layer, exercised or not — a part that is open and fabricable builds no leverage. Make it, change it, or replace it. Nothing in the stack can lock you, nothing in it is closed to you. The deepest degree of freedom, fabrication all the way down.",
+    "economy": {
+      "canonical": "Each project maintains a principle canonical copy: the parts, the software, and the maps to build and fabricate, read, download, fork, remix, etch, flash. Forks branch off and multiply; testing on edge hardware refines the branched histories, run after run — proven in the metal, reversible either way.",
+      "intro": "The branches make a forest. Two roles work it: the treeliner at the edge, the cyberswagman traverses within.",
+      "treelinerLabel": "the treeliner",
+      "treeliner": "The treeliner walks that frayed seam where the forest gives way to light, where day comes through in broken bars between the trunks and the dark thickens behind. The deep timber ahead, the daylight behind, the margin walked and walked again. Here the treeliner studies before the crossing: sizing the terrain, sharpening skill, reading where the going turns hard, a maker in the making, set to cross as the tools advance, miniaturize and run stitched into your pocket. Stake $MONA on a project and stay with it, iteration after iteration, diamond-handing it on the bet it comes good. A project that catches on gathers a crowd, and the crowd throws off prefab kit sales, wearable content, W3F merch, NFTs, Ganda minigames, Ionic appraisals, and level-ups around it. That activity fills a pool, and the treeliner who bet early and deep draws from it. Stake, spectate, walk the edge.",
+      "cyberswagmanLabel": "the cyberswagman",
+      "cyberswagman": "The cyberswagman traverses the forest, where the hunted just might become hunter. They may arrive green, prey to the beasts — the configurations that resist, the constraints that bite — and turn, pass after pass, into what runs them down. Deploy an agent, guided from a base template, trained on combinations of canonicals, set to run performance tests on edge hardware. The fight is the test: run after run on the metal, the cyberswagman takes the beasts and learns them, publishing another canonical from each pass, becoming stronger, ranging deeper, from first configurations — a quantized runtime that fits the accelerator, a sub-1B model that holds on the device, a pipeline that clears real-time latency — to a full open-source chip-fab project. The configurations that prove out accrue to the cyberswagman's stake from the project pool."
+    },
     "roadmap": {
-      "label": "soldering os confidential computing",
-      "mesh": "nodes attest · workloads stay encrypted · zk compute",
+      "label": "soldering maker kits",
       "labels": {
         "hardware": "hardware",
-        "isolates": "isolates",
-        "protects": "seals",
-        "proves": "proves",
-        "runs": "runs"
+        "software": "software",
+        "fabrication": "fabrication"
+      },
+      "openness": {
+        "label": "openness",
+        "rungs": ["documented", "buildable", "fabricable"]
+      },
+      "shape": {
+        "label": "shape the canonical copy",
+        "actions": ["vote", "comment", "edit", "commit", "sell"]
+      },
+      "ledger": {
+        "staked": "staked · mona",
+        "authors": "authors",
+        "revision": "revision",
+        "proposals": "open proposals"
+      },
+      "fabPending": "yours to map",
+      "actions": {
+        "spec": "download maker spec",
+        "software": "download software",
+        "tutorial": "watch video tutorial"
+      },
+      "ui": {
+        "search": "search kits",
+        "all": "all",
+        "connect": "connect wallet",
+        "unit": "kits",
+        "balance": "$mona"
+      },
+      "propose": {
+        "open": "propose a project",
+        "intro": "draft a new kit.",
+        "title": "title",
+        "summary": "summary",
+        "hardware": "hardware",
+        "software": "software",
+        "fabrication": "fabrication route",
+        "stake": "skin in the game",
+        "stakeNote": "stake in $mona",
+        "submit": "submit proposal"
       },
       "phases": [
         {
-          "id": "δ0",
-          "title": "the loop",
-          "status": "sealed",
-          "hardware": "stm32mp157f-dk2 · arm trustzone · op-tee",
-          "isolates": "a single function — one trusted app",
-          "protects": "secure world hidden from the normal world and from root",
-          "proves": "device root of trust",
-          "runs": "key generation, rsa + aes, small payloads",
-          "desc": "inside the secure world, an incoming frame is decrypted, inverted, and returned; the keypair generated on-chip.",
-          "detail": "the secure world generates an rsa keypair and holds the private half on-die. the client wraps an aes key under rsa and the frame under aes; inside trustzone both are unwrapped, the frame decrypted, inverted, and returned. the encrypt-process-return loop runs end to end on the board."
+          "id": "01",
+          "title": "offline signer",
+          "status": "building",
+          "openness": 2,
+          "image": "digitalax_secureenclave_dxcomputer",
+          "hardware": "ATECC608B secure element · Feather RP2040 (no radio) · TFT display wing · two buttons · USB-C · 3D-printed enclosure",
+          "software": "Rust firmware · secp256k1 · BIP-39/32/44 · CryptoAuthLib (I²C) · display and button drivers · companion CLI",
+          "fabrication": "",
+          "desc": "generates and holds keys on the secure element and signs on the device; multi-chain over secp256k1 (Bitcoin and EVM); no radio."
         },
         {
-          "id": "δ1",
-          "title": "the anon",
-          "status": "live",
-          "hardware": "stm32mp157f-dk2 · trustzone · ftpm",
-          "isolates": "the agent's code — one trusted app",
-          "protects": "the agent's code and key, sealed on-die",
-          "proves": "genuine code on genuine hardware — anonymously",
-          "runs": "an agent, anonymous attestation, group signatures",
-          "desc": "an agent whose code the hardware proves genuine and unaltered. behavior verifiable, operator anonymous.",
-          "detail": "the agent is sealed in the secure world and signs its outputs with a key locked on-die. on challenge it proves which code it runs and that the chip is genuine, using anonymous attestation: confirmation that a real node runs exactly this code, without revealing which node or who operates it. the code and the hardware are verified, never an identity."
+          "id": "02",
+          "title": "local transcriber",
+          "status": "mapped",
+          "openness": 1,
+          "image": "digitalax_internetcore_dxcomputer",
+          "hardware": "Raspberry Pi 5 or mini-PC · USB or I²S microphone · NVMe/microSD · optional NPU accelerator (Coral/Hailo)",
+          "software": "whisper.cpp or faster-whisper (small) · ggml or ONNX runtime · audio capture (PortAudio, ffmpeg) · at-rest encryption · local CLI or web interface",
+          "fabrication": "",
+          "desc": "records and transcribes audio on the device; audio and transcript stay local, encrypted at rest."
         },
         {
-          "id": "δ2",
-          "title": "the box",
-          "status": "next",
-          "hardware": "amd epyc 7003 'milan' · sp3 board · ecc rdimm · sev-snp",
-          "isolates": "a whole vm — a full linux",
-          "protects": "per-vm encrypted memory; hypervisor, host os and root all blind",
-          "proves": "remote attestation rooted in the amd secure processor",
-          "runs": "unmodified ffmpeg, codecs, heavy transcoding",
-          "desc": "a whole linux runs in cpu-encrypted memory; the host reads only ciphertext.",
-          "detail": "sev-snp encrypts the vm's entire memory in hardware and adds secure nested paging for integrity. a normal linux with normal ffmpeg or a model server runs inside; the hypervisor, the host os and root see only ciphertext. the minimum is milan (epyc 7003) — rome and naples have sev but not snp."
+          "id": "03",
+          "title": "local agents",
+          "status": "mapped",
+          "openness": 1,
+          "image": "digitalax_jumperwire_dxcomputer",
+          "hardware": "one or more Raspberry Pi / mini-PC / NPU boards · ATECC608 for credentials · local network",
+          "software": "small local models (llama.cpp / Ollama) · agent orchestrator · inter-agent messaging · secret handling on the secure element · in-transit and at-rest encryption",
+          "fabrication": "",
+          "desc": "small models run agent tasks on the device; credentials sit on the secure element; messages between agents stay encrypted."
         },
         {
-          "id": "δ3",
-          "title": "the gpu",
-          "status": "horizon",
-          "hardware": "amd epyc 7003 'milan' · sev-snp · nvidia h100 · h200 · gpu tee",
-          "isolates": "vm and gpu in one chain of trust",
-          "protects": "ciphertext across cpu and gpu memory",
-          "proves": "gpu attestation joins the confidential vm's",
-          "runs": "encrypted video transcoding, distributed across nodes",
-          "desc": "encrypted video is transcoded on the gpu inside the enclave and returned as ciphertext; the work distributes across nodes, none seeing the content.",
-          "detail": "video arrives as ciphertext and is decrypted only inside the gpu enclave, transcoded there, and re-encrypted before it leaves. the same job spreads across a decentralized network of nodes; on each one the plaintext exists only inside the enclave."
+          "id": "04",
+          "title": "surveillance scanner",
+          "status": "mapped",
+          "openness": 1,
+          "image": "digitalax_glitchcore_dxcomputer",
+          "hardware": "Adafruit Feather or Raspberry Pi · broadband RF detector or SDR (RTL-SDR/HackRF) · IR LEDs and sensor for lens glint · magnetometer · OLED / LEDs / haptic · LiPo battery",
+          "software": "MCU firmware (RF sweep, sensor reads) · detection thresholds · spectrum FFT · alert interface",
+          "fabrication": "",
+          "desc": "scans a room for hidden cameras and microphones via RF, lens reflection, and magnetic field; runs offline."
         },
         {
-          "id": "δ4",
-          "title": "the swarm",
-          "status": "horizon",
-          "hardware": "confidential nodes (δ0–δ3) · networked",
-          "isolates": "one job per enclave, per node",
-          "protects": "every input, output and workload as ciphertext",
-          "proves": "every node attests before taking a job",
-          "runs": "encrypted jobs, distributed; nothing retained",
-          "desc": "encrypted jobs run across a network of confidential nodes; each returns only the result the client asked for and wipes everything else.",
-          "detail": "a job enters as ciphertext, runs inside an enclave on whichever node takes it, and returns only what the client needs. inputs, intermediate state, and the agent's memory are wiped when the job ends. the work spreads across the network, and no node retains the content."
+          "id": "05",
+          "title": "open social",
+          "status": "mapped",
+          "openness": 1,
+          "image": "digitalax_encrypt_dxcomputer",
+          "hardware": "self-run confidential node — AMD SEV-SNP or Intel TDX host · local storage · network",
+          "software": "open feed API · open ranking algorithm · in-enclave runtime · on-chain node attestation · client SDK",
+          "fabrication": "",
+          "desc": "a fully open social protocol: the API and ranking algorithm are open and run on confidential nodes anyone can run locally; node integrity is attested on a dedicated chain."
         },
         {
-          "id": "δ5",
-          "title": "the mixer",
-          "status": "horizon",
-          "hardware": "the swarm (δ4) · on-chain",
-          "isolates": "the link between sender, runner and payer",
-          "protects": "payments, routing and on-chain calls, all unlinkable",
-          "proves": "validity by zero-knowledge proof, no identity revealed",
-          "runs": "anonymous payments, routing and on-chain calls",
-          "desc": "a zk mixer breaks the link between who submits a job, who runs it and who pays; on-chain calls are anonymized the same way.",
-          "detail": "zero-knowledge proofs replace identity: a job's validity, a payment, an on-chain call are proven without revealing who made them. a mixing pool re-routes value and requests so submitter, runner and payer stay unlinkable. on-chain functions pass through the same layer and are anonymized too."
+          "id": "06",
+          "title": "video transcoder",
+          "status": "mapped",
+          "openness": 1,
+          "image": "digitalax_dimlab_dxcomputer",
+          "hardware": "AMD EPYC 7003 'Milan' · SP3 board · ECC RDIMM · SEV-SNP · NVIDIA GPU",
+          "software": "FFmpeg with H.264/H.265/AV1 · SEV-SNP firmware and measurement tooling · job-distribution layer · media encryption",
+          "fabrication": "",
+          "desc": "transcodes video inside a confidential VM whose memory the host cannot read; work distributes across nodes."
         }
       ]
+
     }
   },
   "404": {

@@ -1,11 +1,14 @@
-import { INFURA_GATEWAY, INFURA_GATEWAY_INTERNAL } from "@/app/lib/constants";
+"use client";
+
 import { ModalContext } from "@/app/providers";
-import { Post, VideoMetadata } from "@lens-protocol/client";
-import Image from "next/legacy/image";
-import { FunctionComponent, JSX, useContext, useState } from "react";
-import { AiOutlineLoading } from "react-icons/ai";
-import useVideo from "../hooks/useVideo";
-import formatDuration from "@/app/lib/helpers/formatDuration";
+import {
+  FunctionComponent,
+  JSX,
+  MouseEvent,
+  useContext,
+  useRef,
+  useState,
+} from "react";
 import {
   DndContext,
   PointerSensor,
@@ -15,6 +18,13 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 
+const format = (t: number): string => {
+  if (!t || !isFinite(t)) return "0:00";
+  const m = Math.floor(t / 60);
+  const s = Math.floor(t % 60);
+  return `${m}:${s < 10 ? "0" : ""}${s}`;
+};
+
 const FullScreenVideo: FunctionComponent = (): JSX.Element => {
   const [position, setPosition] = useState<{ x: number; y: number }>({
     x: 0,
@@ -22,7 +32,7 @@ const FullScreenVideo: FunctionComponent = (): JSX.Element => {
   });
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
-    useSensor(TouchSensor, { activationConstraint: { distance: 5 } })
+    useSensor(TouchSensor, { activationConstraint: { distance: 5 } }),
   );
 
   return (
@@ -48,16 +58,15 @@ const DraggableVideo: FunctionComponent<{
   position: { x: number; y: number };
 }> = ({ position }) => {
   const context = useContext(ModalContext);
-  const {
-    videoRef,
-    videoLoading,
-    handleNextVideo,
-    handlePlayPause,
-    handleSeek,
-    handleVolumeChange,
-    videosLoading,
-    setVideosLoading,
-  } = useVideo();
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const retriedRef = useRef<boolean>(false);
+  const [playing, setPlaying] = useState<boolean>(false);
+  const [current, setCurrent] = useState<number>(0);
+  const [duration, setDuration] = useState<number>(0);
+  const [volume, setVolume] = useState<number>(1);
+  const [muted, setMuted] = useState<boolean>(false);
+  const [loop, setLoop] = useState<boolean>(true);
+
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: "draggable-video",
   });
@@ -66,315 +75,160 @@ const DraggableVideo: FunctionComponent<{
         position.y + transform.y
       }px, 0)`
     : `translate3d(${position.x}px, ${position.y}px, 0)`;
+
+  const updateDuration = (): void => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (isFinite(v.duration)) setDuration(v.duration);
+  };
+
+  const recover = (): void => {
+    const v = videoRef.current;
+    if (!v || retriedRef.current) return;
+    retriedRef.current = true;
+    v.load();
+  };
+
+  const toggle = (): void => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (v.paused) {
+      v.play();
+    } else {
+      v.pause();
+    }
+  };
+
+  const seek = (e: MouseEvent<HTMLDivElement>): void => {
+    const v = videoRef.current;
+    if (!v || !duration) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const ratio = Math.min(Math.max((e.clientX - rect.left) / rect.width, 0), 1);
+    v.currentTime = ratio * duration;
+    setCurrent(v.currentTime);
+  };
+
+  const changeVolume = (e: MouseEvent<HTMLDivElement>): void => {
+    const v = videoRef.current;
+    if (!v) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const ratio = Math.min(Math.max((e.clientX - rect.left) / rect.width, 0), 1);
+    v.volume = ratio;
+    v.muted = ratio === 0;
+    setVolume(ratio);
+    setMuted(ratio === 0);
+  };
+
+  const toggleMute = (): void => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = !v.muted;
+    setMuted(v.muted);
+  };
+
+  const progress =
+    duration && isFinite(duration) ? (current / duration) * 100 : 0;
+  const level = (muted ? 0 : volume) * 100;
+
   return (
     <div
       ref={setNodeRef}
       style={{ transform: finalTransform }}
-      {...listeners}
-      {...attributes}
-      className={
-        "fixed z-50 xl:w-1/3 sm:w-1/2 w-full h-fit px-4 md:px-8 pb-8 pt-4 cursor-grab active:cursor-grabbing items-center justify-center border-4 border-black rounded-lg top-40 left-0 sm:left-10 flex flex-col gap-3"
-      }
       id="videoplayer"
+      className="cypher-frame fixed z-50 xl:w-1/3 sm:w-1/2 w-full h-fit top-40 left-0 sm:left-10 flex flex-col gap-2 border border-white rounded-lg bg-offBlack p-2"
     >
-      <div className="relative w-full h-fit flex flex-row items-center">
+      <div
+        {...listeners}
+        {...attributes}
+        className="relative w-full h-6 flex flex-row items-center justify-between px-1 cursor-grab active:cursor-grabbing"
+      >
+        <span className="font-nerd text-[0.6rem] uppercase tracking-widest text-bright">
+          dx.computer
+        </span>
         <div
-          className="relative w-fit h-fit justify-start flex pb-2 cursor-sewingHS"
-          onClick={() =>
-            window.open(
-              `https://cypher.digitalax.xyz/item/pub/${
-                (
-                  context?.fullScreenVideo?.allVideos?.[
-                    context?.fullScreenVideo?.index
-                  ] as Post
-                )?.id
-              }`
-            )
-          }
-        >
-          <Image
-            src={`${INFURA_GATEWAY_INTERNAL}Qmf6evtDntW5NPNp5vcGRpyG2LgK6qg5ndJ3kw7cNy4BuK`}
-            width={25}
-            height={25}
-            draggable={false}
-          />
-        </div>
-        <div
-          className="close"
+          className="relative w-fit h-fit text-white text-sm cursor-sewingHS"
           onClick={() =>
             context?.setFullScreenVideo({
               open: false,
-              time: context?.fullScreenVideo?.time,
-              duration: context?.fullScreenVideo?.duration,
-              isPlaying: context?.fullScreenVideo?.isPlaying,
-              volume: context?.fullScreenVideo?.volume,
-              volumeOpen: context?.fullScreenVideo?.volumeOpen,
-              allVideos: context?.fullScreenVideo?.allVideos,
-              cursor: context?.fullScreenVideo?.cursor,
-              index: context?.fullScreenVideo?.index,
+              allVideos: [],
+              index: 0,
             })
           }
         >
-          <Image
-            src={`${INFURA_GATEWAY_INTERNAL}QmRtXzfqbJXXZ6fReUihpauh9nz6pmjUv5CKGm3oXquzh4`}
-            // layout="fill"
-            width={25}
-            height={25}
-            draggable={false}
+          ✕
+        </div>
+      </div>
+      <video
+        ref={videoRef}
+        src="/videos/dronesoverthegadigalhighlands.web.mp4"
+        autoPlay
+        loop={loop}
+        playsInline
+        preload="metadata"
+        poster="/images/dxcomputer-opensourcehardware-35.png"
+        className="relative w-full h-60 object-cover rounded-md bg-black cursor-sewingHS"
+        onClick={toggle}
+        onTimeUpdate={() => setCurrent(videoRef.current?.currentTime ?? 0)}
+        onLoadedMetadata={updateDuration}
+        onDurationChange={updateDuration}
+        onLoadedData={() => {
+          retriedRef.current = false;
+        }}
+        onError={recover}
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+      />
+      <div className="relative w-full h-fit flex flex-row gap-2 items-center px-1 font-nerd text-white text-[0.6rem] uppercase tracking-wider">
+        <div
+          onClick={toggle}
+          className={`relative w-6 h-6 flex items-center justify-center rounded-sm border border-white cursor-sewingHS textransition-colors duration-200  ${
+            loop
+              ? "bg-bright text-offBlack"
+              : "hover:bg-white hover:text-offBlack"
+          }`}
+        >
+          {playing ? "❚❚" : "▶"}
+        </div>
+        <div className="relative w-fit h-fit flex shrink-0">
+          {format(current)}/{format(duration)}
+        </div>
+        <div
+          onClick={seek}
+          className="relative flex-1 h-1.5 rounded-full border border-white cursor-sewingHS overflow-hidden"
+        >
+          <div
+            className="absolute top-0 left-0 h-full bg-bright"
+            style={{ width: `${progress}%` }}
           />
         </div>
-      </div>
-      <div className="relative w-full h-60 flex items-center justify-center rounded-md bg-black border-2 px-2 border-black">
-        {videoLoading?.videos ? (
-          <div className="relative w-fit h-fit flex items-center justify-center animate-spin opacity-50">
-            <AiOutlineLoading size={40} color="white" />
-          </div>
-        ) : (
-          <video
-            key={
-              (
-                (
-                  context?.fullScreenVideo?.allVideos?.[
-                    context?.fullScreenVideo?.index
-                  ] as Post
-                )?.metadata as VideoMetadata
-              )?.video?.item
-            }
-            ref={videoRef}
-            draggable={false}
-            controls={false}
-            playsInline
-            autoPlay={true}
-            className="relative w-full h-full object-cover rounded-md"
-            onLoadedMetadata={() => {
-              setVideosLoading(false);
-
-              context?.setFullScreenVideo({
-                open: context?.fullScreenVideo?.open,
-                time: context?.fullScreenVideo?.time,
-                duration: videoRef?.current?.duration || 0,
-                isPlaying: context?.fullScreenVideo?.isPlaying,
-                volume: context?.fullScreenVideo?.volume,
-                volumeOpen: context?.fullScreenVideo?.volumeOpen,
-                allVideos: context?.fullScreenVideo?.allVideos,
-                cursor: context?.fullScreenVideo?.cursor,
-                index: context?.fullScreenVideo?.index,
-              });
-
-              if (context?.fullScreenVideo?.time != 0 && videoRef.current) {
-                videoRef.current.currentTime =
-                  context?.fullScreenVideo?.time || 0;
-              }
-            }}
-            onTimeUpdate={() =>
-              context?.setFullScreenVideo({
-                open: context?.fullScreenVideo?.open,
-                time: videoRef?.current?.currentTime || 0,
-                duration: context?.fullScreenVideo?.duration,
-                isPlaying: context?.fullScreenVideo?.isPlaying,
-                volume: context?.fullScreenVideo?.volume,
-                volumeOpen: context?.fullScreenVideo?.volumeOpen,
-                allVideos: context?.fullScreenVideo?.allVideos,
-                cursor: context?.fullScreenVideo?.cursor,
-                index: context?.fullScreenVideo?.index,
-              })
-            }
-            onVolumeChange={() =>
-              context?.setFullScreenVideo({
-                open: context?.fullScreenVideo?.open,
-                time: context?.fullScreenVideo?.time,
-                duration: context?.fullScreenVideo?.duration,
-                isPlaying: context?.fullScreenVideo?.isPlaying,
-                volume: videoRef?.current?.volume || 0,
-                volumeOpen: context?.fullScreenVideo?.volumeOpen,
-                allVideos: context?.fullScreenVideo?.allVideos,
-                cursor: context?.fullScreenVideo?.cursor,
-                index: context?.fullScreenVideo?.index,
-              })
-            }
-            onLoadStart={() => setVideosLoading(true)}
-            onEnded={() => handleNextVideo(true)}
-            poster={
-              (
-                (
-                  context?.fullScreenVideo?.allVideos?.[
-                    context?.fullScreenVideo?.index
-                  ] as Post
-                )?.metadata as VideoMetadata
-              )?.video?.cover?.includes("https://")
-                ? (
-                    (
-                      context?.fullScreenVideo?.allVideos?.[
-                        context?.fullScreenVideo?.index
-                      ] as Post
-                    )?.metadata as VideoMetadata
-                  )?.video?.cover
-                : `${INFURA_GATEWAY}/ipfs/${
-                    (
-                      (
-                        context?.fullScreenVideo?.allVideos?.[
-                          context?.fullScreenVideo?.index
-                        ] as Post
-                      )?.metadata as VideoMetadata
-                    )?.video?.cover?.split("ipfs://")?.[1]
-                  }`
-            }
-          >
-            <source
-              src={
-                (
-                  (
-                    context?.fullScreenVideo?.allVideos?.[
-                      context?.fullScreenVideo?.index
-                    ] as Post
-                  )?.metadata as VideoMetadata
-                )?.video?.item?.includes("https://")
-                  ? (
-                      (
-                        context?.fullScreenVideo?.allVideos?.[
-                          context?.fullScreenVideo?.index
-                        ] as Post
-                      )?.metadata as VideoMetadata
-                    )?.video?.item
-                  : `${INFURA_GATEWAY}/ipfs/${
-                      (
-                        (
-                          context?.fullScreenVideo?.allVideos?.[
-                            context?.fullScreenVideo?.index
-                          ] as Post
-                        )?.metadata as VideoMetadata
-                      )?.video?.item?.split("ipfs://")?.[1]
-                    }`
-              }
-            />
-          </video>
-        )}
-      </div>
-      <div
-        className={`relative h-fit flex w-full gap-3 items-center justify-center flex-col md:flex-row flex-wrap`}
-      >
         <div
-          className={`relative w-full h-full flex justify-between flex-row flex-wrap items-center gap-3`}
+          onClick={toggleMute}
+          className={`relative w-6 h-6 flex items-center justify-center rounded-sm border border-white cursor-sewingHS transition-colors duration-200  ${
+            loop
+              ? "bg-bright text-offBlack"
+              : "hover:bg-white hover:text-offBlack"
+          }`}
         >
-          <div className="relative w-fit h-fit flex items-center justify-center gap-3">
-            <div
-              className={`relative cursor-sewingHS w-3 h-3 flex items-center justify-center ${
-                (videoLoading?.play || videosLoading) && "animate-spin"
-              }`}
-              onClick={() =>
-                (!videoLoading?.play || videosLoading) && handlePlayPause()
-              }
-            >
-              {videoLoading?.play || videosLoading ? (
-                <AiOutlineLoading size={15} color="white" />
-              ) : (
-                <Image
-                  src={`${INFURA_GATEWAY_INTERNAL}${
-                    context?.fullScreenVideo?.isPlaying
-                      ? "Qmbg8t4xoNywhtCexD5Ln5YWvcKMXGahfwyK6UHpR3nBip"
-                      : "QmXw52mJFnzYXmoK8eExoHKv7YW9RBVEwSFtfvxXgy7sfp"
-                  }`}
-                  draggable={false}
-                  layout="fill"
-                />
-              )}
-            </div>
-            <div className="relative w-fit h-full flex items-center font-aust text-xs text-white">
-              <span className="text-rosa">
-                {formatDuration(context?.fullScreenVideo?.time || 0)}
-              </span>
-              /
-              <span className="text-light">
-                {formatDuration(context?.fullScreenVideo?.duration || 0)}
-              </span>
-            </div>
-          </div>
-          <div className="relative w-fit h-fit flex items-center justify-center gap-3">
-            <div
-              className=".volume relative cursor-sewingHS w-3 h-3 flex items-center justify-center"
-              onClick={() =>
-                context?.setFullScreenVideo({
-                  open: context?.fullScreenVideo?.open,
-                  time: context?.fullScreenVideo?.time,
-                  duration: context?.fullScreenVideo?.duration,
-                  isPlaying: context?.fullScreenVideo?.isPlaying,
-                  volume: context?.fullScreenVideo?.volume,
-                  volumeOpen: !context?.fullScreenVideo?.volumeOpen,
-                  allVideos: context?.fullScreenVideo?.allVideos,
-                  cursor: context?.fullScreenVideo?.cursor,
-                  index: context?.fullScreenVideo?.index,
-                })
-              }
-            >
-              <Image
-                src={`${INFURA_GATEWAY_INTERNAL}${
-                  context?.fullScreenVideo?.volume === 0
-                    ? "QmVVzvq68RwGZFi46yKEthuG6PXQf74BaMW4yCrZCkgtzK"
-                    : "Qme1i88Yd1x4SJfgrSCFyXp7GELCZRnnPQeFUt6jbfPbqL"
-                }`}
-                layout="fill"
-                alt="volume"
-                draggable={false}
-              />
-            </div>
-
-            <div
-              className="relative cursor-sewingHS w-3 h-3 flex items-center justify-center -rotate-180"
-              onClick={() => !videoLoading?.next && handleNextVideo(false)}
-            >
-              <Image
-                src={`${INFURA_GATEWAY_INTERNAL}QmcYHKZJWJjgibox8iLqNozENnkgD4CZQqYsmmVJpoYUyo`}
-                layout="fill"
-                alt="back"
-                draggable={false}
-              />
-            </div>
-            <div
-              className={`relative cursor-sewingHS w-3 h-3 flex items-center justify-center ${
-                videoLoading?.next && "animate-spin"
-              }`}
-              onClick={() => !videoLoading?.next && handleNextVideo(true)}
-            >
-              {videoLoading?.next ? (
-                <AiOutlineLoading size={15} color="white" />
-              ) : (
-                <Image
-                  src={`${INFURA_GATEWAY_INTERNAL}QmcYHKZJWJjgibox8iLqNozENnkgD4CZQqYsmmVJpoYUyo`}
-                  layout="fill"
-                  alt="next"
-                  draggable={false}
-                />
-              )}
-            </div>
-          </div>
-          {context?.fullScreenVideo?.volumeOpen && (
-            <input
-              className="volume absolute right-1 bottom-7"
-              type="range"
-              max={1}
-              min={0}
-              step={0.01}
-              value={context?.fullScreenVideo?.volume}
-              onChange={(e) => handleVolumeChange(e)}
-            />
-          )}
+          {muted || volume === 0 ? "✕" : "♪"}
         </div>
-        <div className="relative w-full h-full flex flex-col items-center justify-center">
+        <div
+          onClick={changeVolume}
+          className="relative w-10 h-1.5 shrink-0 rounded-full border border-white cursor-sewingHS overflow-hidden"
+        >
           <div
-            className="relative w-full h-2 bg-white/40 rounded-sm cursor-sewingHS"
-            onClick={(e) => handleSeek(e)}
-          >
-            <div
-              className="absolute h-full bg-white/80 rounded-sm"
-              style={{
-                width: `${
-                  ((context?.fullScreenVideo?.time || 0) /
-                    (context?.fullScreenVideo?.duration || 0)) *
-                  100
-                }%`,
-              }}
-            />
-          </div>
+            className="absolute top-0 left-0 h-full bg-bright"
+            style={{ width: `${level}%` }}
+          />
+        </div>
+        <div
+          onClick={() => setLoop((p) => !p)}
+          className={`relative w-6 h-6 flex items-center justify-center rounded-sm border border-white cursor-sewingHS transition-colors duration-200 ${
+            loop
+              ? "bg-bright text-offBlack"
+              : "hover:bg-white hover:text-offBlack"
+          }`}
+        >
+          ↻
         </div>
       </div>
     </div>

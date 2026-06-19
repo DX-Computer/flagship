@@ -21,7 +21,7 @@ function getLocale(request: NextRequest) {
 
 function isBot(userAgent: string) {
   return /googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|sogou/i.test(
-    userAgent
+    userAgent,
   );
 }
 
@@ -32,6 +32,7 @@ export function middleware(request: NextRequest) {
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/images") ||
+    pathname.startsWith("/videos") ||
     pathname.startsWith("/fonts") ||
     pathname.startsWith("/favicon.ico") ||
     pathname.startsWith("/api") ||
@@ -44,7 +45,7 @@ export function middleware(request: NextRequest) {
   }
 
   const pathnameHasLocale = localeSegments.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
   );
 
   if (pathnameHasLocale) {
@@ -62,7 +63,7 @@ export function middleware(request: NextRequest) {
   }
 
   const response = NextResponse.redirect(
-    new URL(`/${locale}${pathname}`, request.url)
+    new URL(`/${locale}${pathname}`, request.url),
   );
 
   response.cookies.set("NEXT_LOCALE", locale, { path: "/", sameSite: "lax" });
@@ -72,6 +73,6 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next|images|llms.txt|fonts|favicon.ico|opengraph-image.png|api|sitemap|image-sitemap.xml).*)",
+    "/((?!_next|images|videos|llms.txt|fonts|favicon.ico|opengraph-image.png|api|sitemap|image-sitemap.xml).*)",
   ],
 };

@@ -29,17 +29,35 @@ export type RoadmapPhase = {
   id: string;
   title: string;
   status: string;
+  openness: number;
+  image: string;
   hardware: string;
-  isolates: string;
-  protects: string;
-  proves: string;
-  runs: string;
+  software: string;
+  fabrication: string;
   desc: string;
-  detail: string;
 };
 
 export type RoadmapProps = {
   dict: any;
+};
+
+export type FlywheelNode = {
+  key: string;
+  label: string;
+  detail: string;
+};
+
+export type FlywheelProps = {
+  dict: any;
+};
+
+export type EconomyProps = {
+  dict: any;
+};
+
+export type VideoPlayerProps = {
+  src: string;
+  poster: string;
 };
 
 export interface FullScreenVideo {

@@ -92,9 +92,7 @@ const Screen: FunctionComponent<ScreenProps> = ({
         <DndContext
           modifiers={[restrictToParentElement, restrictToWindowEdges]}
         >
-          <div
-            className={`"relative w-full h-[60vh] half:h-full flex items-center justify-between rounded-sm overflow-hidden border-4 border-mainText bg-mainText`}
-          >
+          <div className="relative w-full h-[60vh] half:h-full flex items-center justify-between rounded-sm overflow-hidden border-4 border-mainText bg-mainText">
             <Video
               setVideoLoading={setVideoLoading}
               videoLoading={videoLoading}

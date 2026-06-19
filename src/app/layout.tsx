@@ -9,10 +9,10 @@ export const metadata: Metadata = {
   title: "DX.COMPUTER",
   metadataBase: new URL("https://dx.computer/"),
   description:
-    "Dynamics of change. Computational derivatives. Computational dynamics. Transforms, transformers, transformations.",
+    "CC0. 0CC. 0pen Confidential Computing.",
   twitter: {
     description:
-      "Dynamics of change. Computational derivatives. Computational dynamics. Transforms, transformers, transformations.",
+      "CC0. 0CC. 0pen Confidential Computing.",
     creator: "@digitalax_",
     site: "@digitalax_",
     card: "summary_large_image",

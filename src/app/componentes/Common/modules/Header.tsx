@@ -2,7 +2,6 @@ import { FunctionComponent, JSX, useContext } from "react";
 import { HeaderProps } from "../types/common.types";
 import { ModalContext } from "@/app/providers";
 import useHeader from "../hooks/useHeader";
-import Type from "./Type";
 import Screen from "./Screen";
 
 const Header: FunctionComponent<HeaderProps> = ({ dict }): JSX.Element => {
@@ -28,9 +27,6 @@ const Header: FunctionComponent<HeaderProps> = ({ dict }): JSX.Element => {
         setVideoLoading={setVideoLoading}
         videoLoading={videoLoading}
       />
-      <div className="font-mag w-full flex h-fit text-[16vw] relative items-center justify-center" dir="ltr">
-        <Type />
-      </div>
     </div>
   );
 };

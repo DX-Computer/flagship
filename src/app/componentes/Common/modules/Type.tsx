@@ -2,50 +2,105 @@
 
 import React, { useEffect, useState } from "react";
 
-const MIDDLE = "IGITALA";
-const DOMAIN = ".COMPUTER";
-const LEN_DELTA_DOMAIN = ("ΔX" + DOMAIN).length;
+type Transition = {
+  from: string;
+  to: string;
+  fa: number;
+  ta: number;
+  al: number;
+  hold: number;
+};
 
-const nextPhase = (p: number) => (p === 17 ? 1 : p + 1);
+const TRANSITIONS: Transition[] = [
+  { from: "DX.COMPUTER", to: "CC0", fa: 3, ta: 0, al: 1, hold: 10 },
+  { from: "CC0", to: "0CC", fa: 0, ta: 1, al: 2, hold: 10 },
+  { from: "0CC", to: "0penConfidentialComputing", fa: 0, ta: 0, al: 1, hold: 16 },
+  { from: "0penConfidentialComputing", to: "DX.COMPUTER", fa: 4, ta: 3, al: 1, hold: 16 },
+  { from: "DX.COMPUTER", to: "ΔX.COMPUTER", fa: 1, ta: 1, al: 10, hold: 10 },
+  { from: "ΔX.COMPUTER", to: "δX.COMPUTER", fa: 1, ta: 1, al: 10, hold: 10 },
+  { from: "δX.COMPUTER", to: "δIGITALAX", fa: 0, ta: 0, al: 1, hold: 12 },
+  { from: "δIGITALAX", to: "DIGITALAX", fa: 1, ta: 1, al: 8, hold: 12 },
+  { from: "DIGITALAX", to: "DX.COMPUTER", fa: 0, ta: 0, al: 1, hold: 16 },
+];
+
+const parts = (t: Transition) => {
+  const anchor = t.from.slice(t.fa, t.fa + t.al);
+  const aPre = t.from.slice(0, t.fa);
+  const aSuf = t.from.slice(t.fa + t.al);
+  const bPre = t.to.slice(0, t.ta);
+  const bSuf = t.to.slice(t.ta + t.al);
+  return { anchor, aPre, aSuf, bPre, bSuf };
+};
+
+const morphLen = (t: Transition) => {
+  const { anchor, aPre, aSuf, bPre, bSuf } = parts(t);
+  const travel = aPre.length > 0 || bPre.length > 0 ? anchor.length : 0;
+  return aSuf.length + aPre.length + bPre.length + bSuf.length + travel * 2;
+};
+
+const totalLen = (t: Transition) => morphLen(t) + t.hold;
+
+const frame = (t: Transition, k: number) => {
+  const { anchor, aPre, aSuf, bPre, bSuf } = parts(t);
+  const aLen = anchor.length;
+  const e1 = aSuf.length;
+  const e2 = aPre.length;
+  const t1 = bPre.length;
+  const t2 = bSuf.length;
+  const travel = e2 > 0 || t1 > 0 ? aLen : 0;
+  const s1 = e1;
+  const s2 = s1 + travel;
+  const s3 = s2 + e2;
+  const s4 = s3 + t1;
+  const s5 = s4 + travel;
+  const s6 = s5 + t2;
+
+  if (k <= s1) {
+    const suf = aSuf.slice(0, e1 - k);
+    const text = aPre + anchor + suf;
+    return { text, cursorPos: text.length };
+  }
+  if (k <= s2) {
+    const text = aPre + anchor;
+    return { text, cursorPos: aPre.length + aLen - (k - s1) };
+  }
+  if (k <= s3) {
+    const pre = aPre.slice(0, e2 - (k - s2));
+    const text = pre + anchor;
+    return { text, cursorPos: pre.length };
+  }
+  if (k <= s4) {
+    const pre = bPre.slice(0, k - s3);
+    const text = pre + anchor;
+    return { text, cursorPos: pre.length };
+  }
+  if (k <= s5) {
+    const text = bPre + anchor;
+    return { text, cursorPos: bPre.length + (k - s4) };
+  }
+  if (k <= s6) {
+    const suf = bSuf.slice(0, k - s5);
+    const text = bPre + anchor + suf;
+    return { text, cursorPos: text.length };
+  }
+  return { text: t.to, cursorPos: t.to.length };
+};
 
 export default function TypeReverse() {
-  const [phase, setPhase] = useState(0);
-  const [index, setIndex] = useState(0);
+  const [ti, setTi] = useState(0);
+  const [k, setK] = useState(0);
   const [cursorOn, setCursorOn] = useState(true);
 
   useEffect(() => {
-    const tick = setInterval(() => {
-      const next = index + 1;
-      const u = phase;
-      const dLen = DOMAIN.length;
-      const mLen = MIDDLE.length;
-
-      if (u === 0 && next <= dLen) setIndex(next);
-      else if (u === 1 && next <= 60) setIndex(next);
-      else if (u === 2 && next <= dLen) setIndex(next);
-      else if (u === 3 && next <= 30) setIndex(next);
-      else if (u === 4 && next <= mLen) setIndex(next);
-      else if (u === 5 && next <= 60) setIndex(next);
-      else if (u === 6 && next <= mLen) setIndex(next);
-      else if (u === 7 && next <= 30) setIndex(next);
-      else if (u === 8 && next <= 20) setIndex(next);
-      else if (u === 9 && next <= dLen) setIndex(next);
-      else if (u === 10 && next <= LEN_DELTA_DOMAIN) setIndex(next);
-      else if (u === 11 && next <= LEN_DELTA_DOMAIN) setIndex(next);
-      else if (u === 12 && next <= dLen) setIndex(next);
-      else if (u === 13 && next <= mLen) setIndex(next);
-      else if (u === 14 && next <= 60) setIndex(next);
-      else if (u === 15 && next <= mLen) setIndex(next);
-      else if (u === 16 && next <= 20) setIndex(next);
-      else if (u === 17 && next <= dLen) setIndex(next);
+    const id = setInterval(() => {
+      if (k < totalLen(TRANSITIONS[ti])) setK(k + 1);
       else {
-        setPhase(nextPhase(phase));
-        setIndex(0);
+        setTi((ti + 1) % TRANSITIONS.length);
+        setK(0);
       }
     }, 80);
-
-    return () => clearInterval(tick);
-  }, [phase, index]);
+    return () => clearInterval(id);
+  }, [ti, k]);
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -54,107 +109,8 @@ export default function TypeReverse() {
     return () => clearInterval(id);
   }, []);
 
-  const u = phase;
-  let text = "";
-  let cursorPos = 0;
-
-  if (u === 0) {
-    const part = DOMAIN.slice(0, index);
-    text = "DX" + part;
-    cursorPos = text.length;
-  } else if (u === 1) {
-    text = "DX" + DOMAIN;
-    cursorPos = text.length;
-  } else if (u === 2) {
-    const remaining = Math.max(0, DOMAIN.length - index);
-    const part = DOMAIN.slice(0, remaining);
-    text = "DX" + part;
-    cursorPos = text.length;
-  } else if (u === 3) {
-    text = "DX";
-    cursorPos = text.length;
-  } else if (u === 4) {
-    const mid = MIDDLE.slice(0, index);
-    text = "D" + mid + "X";
-    cursorPos = text.length - 1;
-  } else if (u === 5) {
-    text = "DIGITALAX";
-    cursorPos = text.length;
-  } else if (u === 6) {
-    const remaining = Math.max(0, MIDDLE.length - index);
-    const mid = MIDDLE.slice(0, remaining);
-    text = "D" + mid + "X";
-    cursorPos = text.length - 1;
-  } else if (u === 7) {
-    text = "DX";
-    cursorPos = text.length;
-  } else if (u === 8) {
-    text = "ΔX";
-    cursorPos = 1;
-  } else if (u === 9) {
-    const part = DOMAIN.slice(0, index);
-    text = "ΔX" + part;
-    cursorPos = text.length;
-  } else if (u === 10) {
-    text = "ΔX" + DOMAIN;
-    const L = text.length;
-    cursorPos = Math.max(0, L - index);
-  } else if (u === 11) {
-    text = "δX" + DOMAIN;
-    const L = text.length;
-    cursorPos = Math.min(L, index);
-  } else if (u === 12) {
-    const remaining = Math.max(0, DOMAIN.length - index);
-    const part = DOMAIN.slice(0, remaining);
-    text = "δX" + part;
-    cursorPos = text.length;
-  } else if (u === 13) {
-    const mid = MIDDLE.slice(0, index);
-    text = "δ" + mid + "X";
-    cursorPos = text.length - 1;
-  } else if (u === 14) {
-    text = "δIGITALAX";
-    cursorPos = text.length;
-  } else if (u === 15) {
-    const remaining = Math.max(0, MIDDLE.length - index);
-    const mid = MIDDLE.slice(0, remaining);
-    text = "δ" + mid + "X";
-    cursorPos = text.length - 1;
-  } else if (u === 16) {
-    text = "DX";
-    cursorPos = text.length;
-  } else if (u === 17) {
-    const part = DOMAIN.slice(0, index);
-    text = "DX" + part;
-    cursorPos = text.length;
-  }
-
-  const maxShrink = 0.25;
-  let scale = 1;
-
-  if (u === 0) {
-    const p = Math.min(1, index / DOMAIN.length);
-    scale = 1 - maxShrink * p;
-  } else if (u === 1) {
-    scale = 1 - maxShrink;
-  } else if (u === 2) {
-    const remaining = Math.max(0, DOMAIN.length - index);
-    const p = remaining / DOMAIN.length;
-    scale = 1 - maxShrink * p;
-  } else if (u === 9) {
-    const p = Math.min(1, index / DOMAIN.length);
-    scale = 1 - maxShrink * p;
-  } else if (u === 10 || u === 11) {
-    scale = 1 - maxShrink;
-  } else if (u === 12) {
-    const remaining = Math.max(0, DOMAIN.length - index);
-    const p = remaining / DOMAIN.length;
-    scale = 1 - maxShrink * p;
-  } else if (u === 17) {
-    const p = Math.min(1, index / DOMAIN.length);
-    scale = 1 - maxShrink * p;
-  }
-
+  const { text, cursorPos } = frame(TRANSITIONS[ti], k);
+  const scale = Math.min(1, 10 / Math.max(1, text.length));
   const before = text.slice(0, cursorPos);
   const after = text.slice(cursorPos);
 
