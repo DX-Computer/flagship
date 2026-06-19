@@ -181,11 +181,7 @@ const DraggableVideo: FunctionComponent<{
       <div className="relative w-full h-fit flex flex-row gap-2 items-center px-1 font-nerd text-white text-[0.6rem] uppercase tracking-wider">
         <div
           onClick={toggle}
-          className={`relative w-6 h-6 flex items-center justify-center rounded-sm border border-white cursor-sewingHS textransition-colors duration-200  ${
-            loop
-              ? "bg-bright text-offBlack"
-              : "hover:bg-white hover:text-offBlack"
-          }`}
+          className={`relative w-6 h-6 flex items-center justify-center rounded-sm border border-white cursor-sewingHS textransition-colors duration-200 bg-bright text-offBlack hover:bg-white hover:text-offBlack`}
         >
           {playing ? "❚❚" : "▶"}
         </div>
@@ -203,11 +199,7 @@ const DraggableVideo: FunctionComponent<{
         </div>
         <div
           onClick={toggleMute}
-          className={`relative w-6 h-6 flex items-center justify-center rounded-sm border border-white cursor-sewingHS transition-colors duration-200  ${
-            loop
-              ? "bg-bright text-offBlack"
-              : "hover:bg-white hover:text-offBlack"
-          }`}
+          className={`relative w-6 h-6 flex items-center justify-center rounded-sm border border-white cursor-sewingHS transition-colors duration-200 hover:bg-white hover:text-offBlack bg-bright text-offBlack`}
         >
           {muted || volume === 0 ? "✕" : "♪"}
         </div>
