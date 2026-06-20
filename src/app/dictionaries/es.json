@@ -82,10 +82,10 @@
           "status": "construyendo",
           "openness": 2,
           "image": "digitalax_secureenclave_dxcomputer",
-          "hardware": "secure element ATECC608B · Feather RP2040 (sin radio) · pantalla TFT wing · dos botones · USB-C · carcasa impresa en 3D",
-          "software": "firmware en Rust · secp256k1 · BIP-39/32/44 · CryptoAuthLib (I²C) · drivers de pantalla y botones · CLI compañera",
+          "hardware": "secure element NXP SE050 · Feather RP2040 (sin radio) · pantalla TFT wing · dos botones · USB-C · carcasa impresa en 3D",
+          "software": "firmware en Rust · secp256k1 · BIP-39/32/44 · NXP Plug & Trust (SE05x, I²C) · drivers de pantalla y botones · CLI compañera",
           "fabrication": "",
-          "desc": "genera y guarda las claves en el secure element y firma en el dispositivo; multi-cadena sobre secp256k1 (Bitcoin y EVM); sin radio."
+          "desc": "genera y guarda las claves en el secure element y firma en el dispositivo; multi-cadena sobre secp256k1 (Bitcoin y EVM)."
         },
         {
           "id": "02",

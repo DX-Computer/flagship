@@ -83,10 +83,10 @@
           "status": "بنبنيه",
           "openness": 2,
           "image": "digitalax_secureenclave_dxcomputer",
-          "hardware": "secure element ATECC608B · Feather RP2040 (من غير راديو) · شاشة TFT wing · زرارين · USB-C · علبة مطبوعة 3D",
-          "software": "فيرموير بالـ Rust · secp256k1 · BIP-39/32/44 · CryptoAuthLib (I²C) · درايفرات الشاشة والزراير · CLI مرافق",
+          "hardware": "secure element NXP SE050 · Feather RP2040 (من غير راديو) · شاشة TFT wing · زرارين · USB-C · علبة مطبوعة 3D",
+          "software": "فيرموير بالـ Rust · secp256k1 · BIP-39/32/44 · NXP Plug & Trust (SE05x, I²C) · درايفرات الشاشة والزراير · CLI مرافق",
           "fabrication": "",
-          "desc": "بيولّد ويمسك المفاتيح على الـ secure element وبيوقّع على الجهاز؛ multi-chain على secp256k1 (Bitcoin و EVM)؛ من غير راديو."
+          "desc": "بيولّد ويمسك المفاتيح على الـ secure element وبيوقّع على الجهاز؛ multi-chain على secp256k1 (Bitcoin و EVM)."
         },
         {
           "id": "02",
