@@ -10,8 +10,10 @@ import Type from "./Type";
 const Entry: FunctionComponent<{ dict: any }> = ({ dict }): JSX.Element => {
   return (
     <div className="w-full h-full flex bg-black text-white flex-col gap-2 items-center justify-start">
-      <div className="relative w-full h-screen">
-        <Backdrop />
+      <div className="relative w-full h-screen p-3 sm:p-6">
+        <div className="crt-screen relative w-full h-full">
+          <Backdrop />
+        </div>
       </div>
       <div
         className="font-mag w-full flex h-fit text-[14vw] relative items-center justify-center"

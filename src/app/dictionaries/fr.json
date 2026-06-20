@@ -83,7 +83,7 @@
           "status": "en construction",
           "openness": 2,
           "image": "digitalax_secureenclave_dxcomputer",
-          "hardware": "secure element NXP SE050 · Feather RP2040 (sans radio) · écran TFT wing · deux boutons · USB-C · boîtier imprimé en 3D",
+          "hardware": "secure element NXP SE050C2 · Feather RP2040 (sans radio) · écran TFT wing · deux boutons · USB-C · boîtier imprimé en 3D",
           "software": "firmware en Rust · secp256k1 · BIP-39/32/44 · NXP Plug & Trust (SE05x, I²C) · pilotes d'écran et de boutons · CLI compagnon",
           "fabrication": "",
           "desc": "génère et conserve les clés sur le secure element et signe sur l'appareil ; multi-chaîne sur secp256k1 (Bitcoin et EVM)."
