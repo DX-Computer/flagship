@@ -4,6 +4,14 @@ export type FooterProps = {
   dict: any;
 };
 
+export interface ChipBoxProps {
+  width?: number;
+  height?: number;
+  pins?: number;
+  notch?: boolean;
+  children?: ReactNode;
+}
+
 export enum ItemType {
   CoinOp = "coinop",
   Chromadin = "chromadin",

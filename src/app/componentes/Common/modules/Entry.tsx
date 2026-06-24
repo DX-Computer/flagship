@@ -47,7 +47,7 @@ const Entry: FunctionComponent<{ dict: any }> = ({ dict }): JSX.Element => {
             </div>
           </div>
           <div className="w-full flex relative" style={{ height: 202 }} />
-          <RingFunnel />
+          <RingFunnel dict={dict} />
           <Economy dict={dict} />
           <div className="w-full flex relative" style={{ height: 240 }} />
           <div id="site-footer" className="pb-4 relative w-full h-fit flex flex-col gap-2 items-center justify-center">
@@ -63,7 +63,7 @@ const Entry: FunctionComponent<{ dict: any }> = ({ dict }): JSX.Element => {
             </div>
             <div
               onClick={() => window.open("https://dx402.computer")}
-              className="relative w-fit h-fit flex cursor-sewingHS text-mainText underline font-mana text-xs py-4"
+              className="relative w-fit h-fit flex cursor-sewingHS text-mainText underline font-mana text-xxs py-4"
             >
               dx402.computer
             </div>

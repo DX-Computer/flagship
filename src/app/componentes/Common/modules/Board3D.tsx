@@ -2280,6 +2280,30 @@ function EconCap3D({
   );
 }
 
+function SpineMid3D({
+  frames,
+}: {
+  frames: ReturnType<typeof useSiliconY>;
+}): JSX.Element {
+  return (
+    <>
+      <Trace3D frames={frames} />
+      <group
+        position={[
+          0,
+          (frames.sil.bot + 0.24 + (frames.thesis.top - 0.15)) / 2,
+          0.12,
+        ]}
+        rotation={[0, 0, Math.PI / 2]}
+      >
+        <Zener3D scale={0.5} leads={false} />
+      </group>
+      <RegDown3D position={[0, frames.thesis.bot - 0.9, 0.12]} scale={0.26} />
+      <EconCap3D econ={frames.econ} />
+    </>
+  );
+}
+
 export default function Board3D(): JSX.Element {
   const frames = useSiliconY();
   const dpr = 1;
@@ -2385,24 +2409,7 @@ export default function Board3D(): JSX.Element {
           <directionalLight position={[-6, -4, 6]} intensity={1.1} />
           <Suspense fallback={null}>
             {frames.ready && (
-              <>
-                <Trace3D frames={frames} />
-                <group
-                  position={[
-                    0,
-                    (frames.sil.bot + 0.24 + (frames.thesis.top - 0.15)) / 2,
-                    0.12,
-                  ]}
-                  rotation={[0, 0, Math.PI / 2]}
-                >
-                  <Zener3D scale={0.5} leads={false} />
-                </group>
-                <RegDown3D
-                  position={[0, frames.thesis.bot - 0.9, 0.12]}
-                  scale={0.26}
-                />
-                <EconCap3D econ={frames.econ} />
-              </>
+              <SpineMid3D frames={frames} />
             )}
             <Environment
               preset="warehouse"
@@ -2440,7 +2447,7 @@ export default function Board3D(): JSX.Element {
             <directionalLight position={[4, 5, 9]} intensity={2.6} />
             <directionalLight position={[-6, -4, 6]} intensity={1.1} />
             <Suspense fallback={null}>
-              {frames.ready && <EconCap3D econ={frames.econ} />}
+              {frames.ready && <SpineMid3D frames={frames} />}
               <Environment
                 preset="warehouse"
                 background={false}

@@ -31,6 +31,7 @@ const format = (t: number): string => {
 
 const VideoChip: FunctionComponent<VideoPlayerProps> = ({
   src,
+  poster
 }): JSX.Element => {
   const [videoEl] = useState<HTMLVideoElement | null>(() => {
     if (typeof document === "undefined") return null;
@@ -40,6 +41,7 @@ const VideoChip: FunctionComponent<VideoPlayerProps> = ({
     v.muted = false;
     v.autoplay = false;
     v.playsInline = true;
+    v.poster = poster;
     v.crossOrigin = "anonymous";
     v.preload = "auto";
     return v;
@@ -48,7 +50,14 @@ const VideoChip: FunctionComponent<VideoPlayerProps> = ({
     () => (videoEl ? new THREE.VideoTexture(videoEl) : null),
     [videoEl]
   );
+  const posterTex = useMemo(() => {
+    if (typeof document === "undefined" || !poster) return null;
+    const t = new THREE.TextureLoader().load(poster);
+    t.colorSpace = THREE.SRGBColorSpace;
+    return t;
+  }, [poster]);
   const [playing, setPlaying] = useState<boolean>(false);
+  const [started, setStarted] = useState<boolean>(false);
   const [current, setCurrent] = useState<number>(0);
   const [duration, setDuration] = useState<number>(0);
   const [aspect, setAspect] = useState<number>(16 / 9);
@@ -80,7 +89,10 @@ const VideoChip: FunctionComponent<VideoPlayerProps> = ({
       setVolume(videoEl.volume);
       setMuted(videoEl.muted);
     };
-    const onPlay = (): void => setPlaying(true);
+    const onPlay = (): void => {
+      setPlaying(true);
+      setStarted(true);
+    };
     const onPause = (): void => setPlaying(false);
     videoEl.addEventListener("timeupdate", onTime);
     videoEl.addEventListener("durationchange", onMeta);
@@ -165,7 +177,7 @@ const VideoChip: FunctionComponent<VideoPlayerProps> = ({
             />
             <group position={[0, 0, 0.1]} scale={2.7}>
               <Chip
-                dieTex={tex}
+                dieTex={started ? tex : posterTex || tex}
                 bodyW={2}
                 bodyH={2 / aspect}
                 dieW={dieW}
