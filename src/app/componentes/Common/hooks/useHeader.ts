@@ -22,9 +22,7 @@ const useHeader = () => {
 
   return {
     videoLoading,
-
     setVideoLoading,
-
     chosenLanguage,
     changeLanguage,
     setChosenLanguage,

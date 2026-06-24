@@ -6,5 +6,5 @@ import FullScreenVideo from "./FullScreenVideo";
 
 export default function ModalsEntry({ dict }: { dict: any }) {
   const context = useContext(ModalContext);
-  return <>{context?.fullScreenVideo?.open && <FullScreenVideo />}</>;
+  return <>{context?.fullScreenVideo && <FullScreenVideo />}</>;
 }

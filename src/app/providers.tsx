@@ -1,97 +1,26 @@
 "use client";
 import {
   createContext,
-  RefObject,
   SetStateAction,
   useEffect,
-  useRef,
   useState,
 } from "react";
-import { HEART_COLORS, THEME_COLORS } from "./lib/constants";
-import { WagmiProvider, createConfig, http } from "wagmi";
-import { ConnectKitProvider } from "connectkit";
-import { injected } from "@wagmi/connectors";
-import { chains } from "@lens-chain/sdk/viem";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { FullScreenVideo } from "./componentes/Common/types/common.types";
-import { mainnet, PublicClient } from "@lens-protocol/client";
 
 const queryClient = new QueryClient();
 
 export const ModalContext = createContext<
   | {
-      setFullScreenVideo: (e: SetStateAction<FullScreenVideo>) => void;
-      fullScreenVideo: FullScreenVideo;
-      heartColor: string;
-      rewind: RefObject<HTMLDivElement | null>;
-      handleRewind: () => void;
-      changeColor: () => void;
-      lensClient: PublicClient | undefined;
+      setFullScreenVideo: (e: SetStateAction<boolean>) => void;
+      fullScreenVideo: boolean;
     }
   | undefined
 >(undefined);
 
-export const config = createConfig({
-  chains: [chains.mainnet],
-  transports: {
-    [chains.mainnet.id]: http("https://rpc.lens.xyz"),
-  },
-  connectors: [
-    injected({
-      target: "metaMask",
-    }),
-  ],
-  ssr: true,
-});
-
 export default function Providers({ children }: { children: React.ReactNode }) {
-  const rewind = useRef<null | HTMLDivElement>(null);
-  const handleRewind = (): void => {
-    rewind.current?.scrollIntoView({ behavior: "smooth" });
-  };
-  const [lensClient, setLensClient] = useState<PublicClient | undefined>();
-  const [fullScreenVideo, setFullScreenVideo] = useState<FullScreenVideo>({
-    open: false,
-    allVideos: [],
-    index: 0,
-    volume: 0.5,
-  });
-  const [color, setColor] = useState<string>(THEME_COLORS[0]);
-  const [heartColor, setHeartColor] = useState<string>(THEME_COLORS[0]);
-  const changeColor = () => {
-    if (THEME_COLORS.indexOf(color) < 9) {
-      setColor(THEME_COLORS[THEME_COLORS.indexOf(color) + 1]);
-      setHeartColor(HEART_COLORS[THEME_COLORS.indexOf(color) + 1]);
-      localStorage.setItem(
-        "digi-theme-color",
-        THEME_COLORS[THEME_COLORS.indexOf(color) + 1]
-      );
-    } else {
-      setColor(THEME_COLORS[0]);
-      setHeartColor(HEART_COLORS[0]);
-      localStorage.setItem("digi-theme-color", THEME_COLORS[0]);
-    }
-  };
+  const [fullScreenVideo, setFullScreenVideo] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!lensClient) {
-      setLensClient(
-        PublicClient.create({
-          environment: mainnet,
-          storage: window.localStorage,
-        })
-      );
-    }
-  }, []);
-
-  useEffect(() => {
-    if (window) {
-      const storageColor = localStorage.getItem("digi-theme-color");
-      if (storageColor) {
-        setColor(storageColor);
-        setHeartColor(HEART_COLORS[THEME_COLORS.indexOf(storageColor)]);
-      }
-    }
     console.log(`888       888                                    d8b 888                                                                  888                                           
     888   o   888                                    Y8P 888                                                                  888                                           
     888  d8b  888                                        888                                                                  888                                           
@@ -183,34 +112,17 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <WagmiProvider config={config}>
-      <QueryClientProvider client={queryClient}>
-        <ConnectKitProvider
-          customTheme={{
-            "--ck-font-family": '"Nerd Semi", cursive',
-          }}
-        >
-          <ModalContext.Provider
-            value={{
-              heartColor,
-              rewind,
-              lensClient,
-              handleRewind,
-              changeColor,
-              fullScreenVideo,
-              setFullScreenVideo,
-            }}
-          >
-            <div
-              className={`flex relative w-full h-full ${
-                color ? `theme-${color}` : "theme-cream"
-              }`}
-            >
-              {children}
-            </div>
-          </ModalContext.Provider>
-        </ConnectKitProvider>
-      </QueryClientProvider>
-    </WagmiProvider>
+    <QueryClientProvider client={queryClient}>
+      <ModalContext.Provider
+        value={{
+          fullScreenVideo,
+          setFullScreenVideo,
+        }}
+      >
+        <div className={`flex relative w-full h-full`}>
+          {children}
+        </div>
+      </ModalContext.Provider>
+    </QueryClientProvider>
   );
 }

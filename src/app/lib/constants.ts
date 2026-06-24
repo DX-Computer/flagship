@@ -12,31 +12,22 @@ export const INFURA_GATEWAY_INTERNAL: string =
 export const CHROMADIN: `0x${string}` =
   "0x16a362A10C1f6Bc0565C8fFAd298f1c2761630C5";
 
-export const THEME_COLORS = [
-  "cream",
-  "dark",
-  "blue",
-  "green",
-  "purple",
-  "heart",
-  "plum",
-  "lime",
-  "sea",
-  "hot",
-];
-export const HEART_COLORS = [
-  "#131313",
-  "#FAF4E8",
-  "#FAF4E8",
-  "#131313",
-  "#4b0082",
-  "#2f25a7",
-  "#3cfdf6",
-  "#090d12",
-  "#c3e0c3",
-  "#ce02cb",
-];
+export const MONA_ADDRESS: `0x${string}` | undefined = undefined;
 
+export const BOARD_BG: string = "#011d42";
+export const METAL_GOLD: string = "#c2a155";
+export const METAL_SILVER: string = "#dfd1be";
+export const METAL_STEEL: string = "#c4c9d1";
+
+export const ERC20_ABI = [
+  {
+    type: "function",
+    name: "balanceOf",
+    stateMutability: "view",
+    inputs: [{ name: "account", type: "address" }],
+    outputs: [{ name: "", type: "uint256" }],
+  },
+] as const;
 
 export enum Idiomas {
   Ingles = "en",

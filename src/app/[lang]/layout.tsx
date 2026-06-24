@@ -27,7 +27,7 @@ export default async function RootLayout({
     <>
       <div
         dir={dir}
-        className="min-h-full h-auto min-w-screen w-screen relative selection:bg-skyBlue selection:text-dull cursor-sewingS bg-mainBg overflow-x-hidden flex flex-col"
+        className="min-h-full h-auto min-w-screen w-screen relative selection:bg-skyBlue selection:text-dull cursor-sewingS overflow-x-hidden flex flex-col"
         id="noScroll"
       >
         {children}

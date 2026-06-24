@@ -148,11 +148,7 @@ const DraggableVideo: FunctionComponent<{
         <div
           className="relative w-fit h-fit text-white text-sm cursor-sewingHS"
           onClick={() =>
-            context?.setFullScreenVideo({
-              open: false,
-              allVideos: [],
-              index: 0,
-            })
+            context?.setFullScreenVideo(false)
           }
         >
           ✕

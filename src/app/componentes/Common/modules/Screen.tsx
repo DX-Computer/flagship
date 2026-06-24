@@ -68,7 +68,7 @@ const Screen: FunctionComponent<ScreenProps> = ({
             })}
           </div>
           <div className="relative w-full justify-between h-fit half:h-full flex flex-row gap-5">
-            <div className="relative w-full h-20 half:h-full flex bg-[#985458]">
+            <div className="relative w-full h-96 half:h-full flex bg-[#985458]">
               <Image
                 draggable={false}
                 objectFit="cover"
@@ -76,7 +76,7 @@ const Screen: FunctionComponent<ScreenProps> = ({
                 src={`${INFURA_GATEWAY_INTERNAL}QmVGsLUY9EmS9MPAcjHkAQ6k55P3vyBH5nZKHLTj4EsPyL`}
               />
             </div>
-            <div className="relative w-fit h-20 half:h-full flex items-end justify-end">
+            <div className="relative w-fit h-96 half:h-full flex items-end justify-end">
               <div className="relative w-8 h-full flex bg-[#985458]"></div>
             </div>
           </div>

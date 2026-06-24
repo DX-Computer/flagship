@@ -49,7 +49,18 @@ export function middleware(request: NextRequest) {
   );
 
   if (pathnameHasLocale) {
-    return NextResponse.next();
+    const urlLocale = localeSegments.find(
+      (locale) =>
+        pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
+    );
+    const response = NextResponse.next();
+    if (urlLocale && request.cookies.get("NEXT_LOCALE")?.value !== urlLocale) {
+      response.cookies.set("NEXT_LOCALE", urlLocale, {
+        path: "/",
+        sameSite: "lax",
+      });
+    }
+    return response;
   }
 
   if (isBot(userAgent)) {

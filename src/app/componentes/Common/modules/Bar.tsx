@@ -97,11 +97,7 @@ const Bar: FunctionComponent<BarProps> = ({
           <div
             className="absolute w-full h-full top-0 left-0 z-0 flex items-center justify-center cursor-sewingHS border-y border-r border-mainText bg-white rounded-r-md"
             onClick={() =>
-              context?.setFullScreenVideo({
-                open: true,
-                allVideos: [],
-                index: 0,
-              })
+              context?.setFullScreenVideo(true)
             }
           >
             <Marquee
