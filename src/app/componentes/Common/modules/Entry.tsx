@@ -7,6 +7,7 @@ import Board3D from "./Board3D";
 import Rings from "./Rings";
 import Fanout from "./Fanout";
 import RingFunnel from "./RingFunnel";
+import ChipMarquee from "./ChipMarquee";
 import Type from "./Type";
 import Image from "next/image";
 
@@ -107,6 +108,7 @@ const Entry: FunctionComponent<{ dict: any }> = ({ dict }): JSX.Element => {
                 src={"/images/pcbfondo.png"}
               />
             </div>
+            <ChipMarquee />
           </div>
         </div>
       </div>

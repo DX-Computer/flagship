@@ -1,33 +1,13 @@
-export const LOCALES: string[] = ["en", "es"];
+export const LOCALES: string[] = ["en", "es", "fr", "pt", "ar"];
 
-export const KINORA_QUEST_DATA: `0x${string}` =
-  "0xB638b8e910f5852d9B2b69D250883EB3E8575092";
 export const INFURA_GATEWAY: string = "https://thedial.infura-ipfs.io";
-export const DIGITALAX_ADDRESS: string =
-  "e0deaff9be0da5309d2b19bcb0c133397b2bb20be563ab038e265b0800ddcf57";
-export const IPFS_REGEX: RegExp = /\b(Qm[1-9A-Za-z]{44}|ba[A-Za-z2-7]{57})\b/;
 export const INFURA_GATEWAY_INTERNAL: string =
   "https://digitalax.xyz/api/infura/";
-
-export const CHROMADIN: `0x${string}` =
-  "0x16a362A10C1f6Bc0565C8fFAd298f1c2761630C5";
-
-export const MONA_ADDRESS: `0x${string}` | undefined = undefined;
 
 export const BOARD_BG: string = "#011d42";
 export const METAL_GOLD: string = "#c2a155";
 export const METAL_SILVER: string = "#dfd1be";
 export const METAL_STEEL: string = "#c4c9d1";
-
-export const ERC20_ABI = [
-  {
-    type: "function",
-    name: "balanceOf",
-    stateMutability: "view",
-    inputs: [{ name: "account", type: "address" }],
-    outputs: [{ name: "", type: "uint256" }],
-  },
-] as const;
 
 export enum Idiomas {
   Ingles = "en",
@@ -62,8 +42,6 @@ export const idiomaAImagen: { [key in Idiomas]: string } = {
   ["ŋ"]: "Qmf11oxoyAe5vUbZAwHSTCCfRSWTMYijruBeABLrW4rhp7",
   ["gd"]: "QmUzrNvabPJXnZZXsaHDKNoSNTzbQiUjGaRA4dU2aFBJmk",
 };
-
-
 
 export const indiceAIdioma: { [key in number]: string } = {
   [0]: "en",
