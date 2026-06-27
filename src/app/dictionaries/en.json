@@ -83,8 +83,8 @@
           "status": "building",
           "openness": 2,
           "image": "digitalax_secureenclave_dxcomputer",
-          "hardware": "NXP SE050C2 secure element · Feather RP2040 (no radio) · TFT display wing · two buttons · USB-C · 3D-printed enclosure",
-          "software": "Rust firmware · secp256k1 · BIP-39/32/44 · NXP Plug & Trust (SE05x, I²C) · display and button drivers · companion CLI",
+          "hardware": "SE051 Plug&Trust Click (NXP SE051C2 secure element) · Adafruit ESP32-S3 Reverse TFT Feather (240×135 IPS TFT + 3 buttons) · USB-C",
+          "software": "Rust no_std firmware (ESP32-S3, esp-hal) · secp256k1 · BIP-39/32/44 · NXP Plug & Trust (SE05x, I²C) · ST7789 display and button UI · USB-serial CLI",
           "fabrication": "",
           "desc": "generates and holds keys on the secure element and signs on the device; multi-chain over secp256k1 (Bitcoin and EVM)."
         },

@@ -84,8 +84,8 @@
           "status": "بنبنيه",
           "openness": 2,
           "image": "digitalax_secureenclave_dxcomputer",
-          "hardware": "secure element NXP SE050C2 · Feather RP2040 (من غير راديو) · شاشة TFT wing · زرارين · USB-C · علبة مطبوعة 3D",
-          "software": "فيرموير بالـ Rust · secp256k1 · BIP-39/32/44 · NXP Plug & Trust (SE05x, I²C) · درايفرات الشاشة والزراير · CLI مرافق",
+          "hardware": "SE051 Plug&Trust Click (secure element NXP SE051C2) · Adafruit ESP32-S3 Reverse TFT Feather (شاشة TFT IPS 240×135 + 3 أزرار) · USB-C",
+          "software": "فيرموير Rust no_std (ESP32-S3, esp-hal) · secp256k1 · BIP-39/32/44 · NXP Plug & Trust (SE05x, I²C) · واجهة شاشة ST7789 وأزرار · CLI عبر USB-serial",
           "fabrication": "",
           "desc": "بيولّد ويمسك المفاتيح على الـ secure element وبيوقّع على الجهاز؛ multi-chain على secp256k1 (Bitcoin و EVM)."
         },

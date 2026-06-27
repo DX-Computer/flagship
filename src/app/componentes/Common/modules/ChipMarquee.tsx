@@ -8,6 +8,8 @@ const CH = 86;
 const CPINS = 5;
 const FW = 46;
 const PLACAS = [1, 2, 3, 4, 5];
+const REPEAT = 3;
+const RUN = Array.from({ length: REPEAT }).flatMap(() => PLACAS);
 const GOLD = "#c9a84e";
 const STEP = CH / (CPINS + 1);
 
@@ -66,14 +68,14 @@ const Cell = ({ n }: { n: number }): JSX.Element => (
 const ChipMarquee = (): JSX.Element => {
   return (
     <div
-      className="relative w-full overflow-hidden flex"
+      className="relative w-full overflow-hidden"
       style={{ pointerEvents: "none", paddingTop: 10, paddingBottom: 2 }}
     >
       <div
         className="flex flex-row"
-        style={{ width: "max-content", animation: "marquee 30s linear infinite" }}
+        style={{ width: "max-content", animation: "marquee 60s linear infinite" }}
       >
-        {[...PLACAS, ...PLACAS].map((n, i) => (
+        {[...RUN, ...RUN].map((n, i) => (
           <Cell key={i} n={n} />
         ))}
       </div>

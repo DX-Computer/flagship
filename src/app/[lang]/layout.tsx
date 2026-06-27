@@ -2,7 +2,7 @@ import Modals from "../componentes/Modals/modules/Modals";
 
 export type tParams = Promise<{ lang: string }>;
 
-const RTL_LANGS = ["ar", "א", "د", "yi"];
+const RTL_LANGS = ["ar", "he", "א", "د", "yi"];
 
 export async function generateStaticParams() {
   return [
@@ -11,6 +11,7 @@ export async function generateStaticParams() {
     { lang: "ar" },
     { lang: "pt" },
     { lang: "fr" },
+    { lang: "he" },
   ];
 }
 

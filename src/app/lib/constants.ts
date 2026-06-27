@@ -1,4 +1,4 @@
-export const LOCALES: string[] = ["en", "es", "fr", "pt", "ar"];
+export const LOCALES: string[] = ["en", "es", "fr", "pt", "ar", "he"];
 
 export const INFURA_GATEWAY: string = "https://thedial.infura-ipfs.io";
 export const INFURA_GATEWAY_INTERNAL: string =
@@ -13,7 +13,7 @@ export enum Idiomas {
   Ingles = "en",
   Español = "es",
   Árabe = "ar",
-  Hebreo = "א",
+  Hebreo = "he",
   Portugués = "pt",
   Ucraniano = "ук",
   Farsi = "د",
@@ -30,7 +30,7 @@ export const idiomaAImagen: { [key in Idiomas]: string } = {
   ["en"]: "QmZ1h4g4sypkZXDPsSQxg8YoqN3mnYUtFVfxeWVRcC7Xmb",
   ["es"]: "QmY43U5RovVkoGrkLiFyA2VPMnGxf5e3NgYZ95u9aNJdem",
   ["ar"]: "Qmb2rQi84hLXtiY673VaBHMTB32Lo1Xe1ah4Q7mG2fKf4J",
-  ["א"]: "Qmdyd6iUPYNruEi5BJaYnoJ8H4FDwqxJF4EAzLvYZfxgXE",
+  ["he"]: "Qmdyd6iUPYNruEi5BJaYnoJ8H4FDwqxJF4EAzLvYZfxgXE",
   ["pt"]: "QmQce4gWKLj9xWySjxUVsHKorX5rDL45JiaU4y1TBqjLVa",
   ["ук"]: "QmW1QzS8AfYEaV4Kc6YtwXSUXRUatP6VozLy1HB61DTy27",
   ["د"]: "QmTchZ7B2vrTnkKKBpqoYcmLQ8H9wxiNet7DWtmQeVzMdM",
@@ -47,7 +47,7 @@ export const indiceAIdioma: { [key in number]: string } = {
   [0]: "en",
   [1]: "es",
   [2]: "ar",
-  [3]: "א",
+  [3]: "he",
   [4]: "pt",
   [5]: "ук",
   [6]: "د",
@@ -64,7 +64,7 @@ export const idiomaAIndice: { [key in Idiomas]: number } = {
   ["en"]: 0,
   ["es"]: 1,
   ["ar"]: 2,
-  ["א"]: 3,
+  ["he"]: 3,
   ["pt"]: 4,
   ["ук"]: 5,
   ["د"]: 6,

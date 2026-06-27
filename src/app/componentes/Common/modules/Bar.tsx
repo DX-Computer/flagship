@@ -60,17 +60,17 @@ const Bar: FunctionComponent<BarProps> = ({
             </div>
             <div
               onClick={() => {
-                if ([0, 1, 2, 4, 9].includes(chosenLanguage)) {
+                if ([0, 1, 2, 3, 4, 9].includes(chosenLanguage)) {
                   changeLanguage(indiceAIdioma[chosenLanguage]);
                 }
               }}
               className={`text-xxs flex items-center justify-center px-2 border border-mainText rounded-sm h-6 w-full ${
-                [0, 1, 2, 4, 9].includes(chosenLanguage) &&
+                [0, 1, 2, 3, 4, 9].includes(chosenLanguage) &&
                 "cursor-sewingHS active:scale-95"
               }`}
             >
               ~*{" "}
-              {![0, 1, 2, 4, 9].includes(chosenLanguage)
+              {![0, 1, 2, 3, 4, 9].includes(chosenLanguage)
                 ? dict?.common?.soon
                 : dict?.common?.ve}{" "}
               *~

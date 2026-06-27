@@ -2,8 +2,8 @@ import { match } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 import { NextRequest, NextResponse } from "next/server";
 
-let locales = ["en", "es", "ar", "pt", "fr"];
-let localeSegments = ["en", "es", "ar", "pt", "fr"];
+let locales = ["en", "es", "ar", "pt", "fr", "he"];
+let localeSegments = ["en", "es", "ar", "pt", "fr", "he"];
 let defaultLocale = "en";
 
 function getLocale(request: NextRequest) {
