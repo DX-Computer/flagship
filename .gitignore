@@ -43,3 +43,4 @@ next-env.d.ts
 # large source videos — only compressed .web.mp4 get committed
 public/videos/*.mp4
 !public/videos/*.web.mp4
+.claude
