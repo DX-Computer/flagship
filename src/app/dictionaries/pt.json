@@ -102,6 +102,17 @@
         },
         {
           "id": "03",
+          "title": "gateway ipfs",
+          "status": "mapeado",
+          "openness": 1,
+          "image": "digitalax_risv_dxcomputer",
+          "hardware": "Raspberry Pi 5 ou SBC RISC-V · SSD NVMe · ethernet gigabit · NPU opcional para detecção no dispositivo (Coral/Hailo)",
+          "software": "Kubo ou iroh · gateway HTTP local · criptografia client-side para conteúdo privado · detecção de rosto/PII no upload · registro de contestação com auto-unpin · reputação de nós on-chain",
+          "fabrication": "",
+          "desc": "um nó e gateway ipfs auto-hospedado: o conhecimento publica como CC0, o conteúdo pessoal fica criptografado, e qualquer pessoa identificável num arquivo pode contestá-lo para fora da rede — a qualquer momento, o direito nunca expira."
+        },
+        {
+          "id": "04",
           "title": "agentes locais",
           "status": "mapeado",
           "openness": 1,
@@ -112,7 +123,7 @@
           "desc": "modelos pequenos rodam tarefas de agente no dispositivo; as credenciais ficam no secure element; as mensagens entre agentes seguem criptografadas."
         },
         {
-          "id": "04",
+          "id": "05",
           "title": "scanner de vigilância",
           "status": "mapeado",
           "openness": 1,
@@ -123,7 +134,7 @@
           "desc": "varre uma sala em busca de câmeras e microfones ocultos por RF, reflexo de lente e campo magnético; roda offline."
         },
         {
-          "id": "05",
+          "id": "06",
           "title": "social aberto",
           "status": "mapeado",
           "openness": 1,
@@ -134,7 +145,7 @@
           "desc": "um protocolo social totalmente aberto: a API e o algoritmo de ranking são abertos e rodam em nós confidenciais que qualquer um pode rodar localmente; a integridade do nó é atestada em uma cadeia dedicada."
         },
         {
-          "id": "06",
+          "id": "07",
           "title": "transcodificador de vídeo",
           "status": "mapeado",
           "openness": 1,

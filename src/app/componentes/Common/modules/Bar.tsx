@@ -3,7 +3,7 @@ import {
   Idiomas,
   indiceAIdioma,
   indiceASimbolo,
-  INFURA_GATEWAY_INTERNAL,
+  IPFS_GATEWAY_INTERNAL,
 } from "@/app/lib/constants";
 import Image from "next/legacy/image";
 import { FunctionComponent, JSX, useContext } from "react";
@@ -80,7 +80,7 @@ const Bar: FunctionComponent<BarProps> = ({
             <div className="relative w-8 h-10 flex items-center justify-center">
               <Image
                 layout="fill"
-                src={`${INFURA_GATEWAY_INTERNAL}${
+                src={`${IPFS_GATEWAY_INTERNAL}${
                   idiomaAImagen[indiceAIdioma[chosenLanguage] as Idiomas]
                 }`}
                 draggable={false}

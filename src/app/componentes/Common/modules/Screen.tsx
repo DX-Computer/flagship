@@ -2,7 +2,7 @@ import { FunctionComponent, JSX } from "react";
 import Bar from "./Bar";
 import { ScreenProps } from "../types/common.types";
 import Image from "next/legacy/image";
-import { INFURA_GATEWAY_INTERNAL } from "@/app/lib/constants";
+import { IPFS_GATEWAY_INTERNAL } from "@/app/lib/constants";
 import Video from "./Video";
 import { DndContext } from "@dnd-kit/core";
 import {
@@ -73,7 +73,7 @@ const Screen: FunctionComponent<ScreenProps> = ({
                 draggable={false}
                 objectFit="cover"
                 layout="fill"
-                src={`${INFURA_GATEWAY_INTERNAL}QmVGsLUY9EmS9MPAcjHkAQ6k55P3vyBH5nZKHLTj4EsPyL`}
+                src={`${IPFS_GATEWAY_INTERNAL}QmVGsLUY9EmS9MPAcjHkAQ6k55P3vyBH5nZKHLTj4EsPyL`}
               />
             </div>
             <div className="relative w-fit h-96 half:h-full flex items-end justify-end">

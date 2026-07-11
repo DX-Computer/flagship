@@ -101,6 +101,17 @@
         },
         {
           "id": "03",
+          "title": "gateway ipfs",
+          "status": "mapeado",
+          "openness": 1,
+          "image": "digitalax_risv_dxcomputer",
+          "hardware": "Raspberry Pi 5 o SBC RISC-V · SSD NVMe · ethernet gigabit · NPU opcional para detección en el dispositivo (Coral/Hailo)",
+          "software": "Kubo o iroh · gateway HTTP local · cifrado client-side para contenido privado · detección de rostro/PII al subir · registro de impugnación con auto-unpin · reputación de nodos on-chain",
+          "fabrication": "",
+          "desc": "un nodo y gateway ipfs autoalojado: el conocimiento se publica como CC0, el contenido personal queda cifrado, y cualquier persona identificable en un archivo puede impugnarlo fuera de la red — en cualquier momento, el derecho nunca expira."
+        },
+        {
+          "id": "04",
           "title": "agentes locales",
           "status": "mapeado",
           "openness": 1,
@@ -111,7 +122,7 @@
           "desc": "modelos pequeños corren tareas de agente en el dispositivo; las credenciales viven en el secure element; los mensajes entre agentes van cifrados."
         },
         {
-          "id": "04",
+          "id": "05",
           "title": "escáner de vigilancia",
           "status": "mapeado",
           "openness": 1,
@@ -122,7 +133,7 @@
           "desc": "rastrea una sala en busca de cámaras y micrófonos ocultos por RF, reflejo de lente y campo magnético; corre offline."
         },
         {
-          "id": "05",
+          "id": "06",
           "title": "social abierto",
           "status": "mapeado",
           "openness": 1,
@@ -133,7 +144,7 @@
           "desc": "un protocolo social totalmente abierto: la API y el algoritmo de ranking son abiertos y corren en nodos confidenciales que cualquiera puede correr localmente; la integridad del nodo se atestigua en una cadena dedicada."
         },
         {
-          "id": "06",
+          "id": "07",
           "title": "transcodificador de video",
           "status": "mapeado",
           "openness": 1,

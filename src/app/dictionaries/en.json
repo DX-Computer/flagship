@@ -2,6 +2,7 @@
   "common": {
     "goApp": "go to app",
     "cc0": "100% CC0. We build in, for, and from the public domain.",
+    "bend": "DO NOT BEND",
     "shop": "GO TO RUNWAY",
     "go": "GO",
     "select": "select language",
@@ -101,6 +102,17 @@
         },
         {
           "id": "03",
+          "title": "ipfs gateway",
+          "status": "mapped",
+          "openness": 1,
+          "image": "digitalax_risv_dxcomputer",
+          "hardware": "Raspberry Pi 5 or RISC-V SBC · NVMe SSD · gigabit ethernet · optional NPU for on-device detection (Coral/Hailo)",
+          "software": "Kubo or iroh · local HTTP gateway · client-side encryption for private content · on-device face/PII detection at upload · contestation registry with auto-unpin · on-chain node reputation",
+          "fabrication": "",
+          "desc": "a self-run ipfs node and gateway: knowledge publishes as CC0, personal content stays encrypted, and anyone identifiable in a file can contest it off the network — anytime, the right never expires."
+        },
+        {
+          "id": "04",
           "title": "local agents",
           "status": "mapped",
           "openness": 1,
@@ -111,7 +123,7 @@
           "desc": "small models run agent tasks on the device; credentials sit on the secure element; messages between agents stay encrypted."
         },
         {
-          "id": "04",
+          "id": "05",
           "title": "surveillance scanner",
           "status": "mapped",
           "openness": 1,
@@ -122,7 +134,7 @@
           "desc": "scans a room for hidden cameras and microphones via RF, lens reflection, and magnetic field; runs offline."
         },
         {
-          "id": "05",
+          "id": "06",
           "title": "open social",
           "status": "mapped",
           "openness": 1,
@@ -133,7 +145,7 @@
           "desc": "a fully open social protocol: the API and ranking algorithm are open and run on confidential nodes anyone can run locally; node integrity is attested on a dedicated chain."
         },
         {
-          "id": "06",
+          "id": "07",
           "title": "video transcoder",
           "status": "mapped",
           "openness": 1,

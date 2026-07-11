@@ -1,9 +1,9 @@
-import { INFURA_GATEWAY } from "../constants";
+import { IPFS_GATEWAY } from "../constants";
 
 const fetchIPFSJSON = async (uri: string): Promise<any> => {
   let cleaned: string = uri;
   if (uri?.includes("ipfs://")) {
-    cleaned = `${INFURA_GATEWAY}/ipfs/${cleaned
+    cleaned = `${IPFS_GATEWAY}/ipfs/${cleaned
       ?.split("ipfs://")?.[1]
       ?.replace(/"/g, "")
       ?.trim()}`;
@@ -13,7 +13,7 @@ const fetchIPFSJSON = async (uri: string): Promise<any> => {
       ?.replace(/"/g, "")
       ?.trim()}`;
   } else {
-    cleaned = `${INFURA_GATEWAY}/ipfs/${cleaned}`;
+    cleaned = `${IPFS_GATEWAY}/ipfs/${cleaned}`;
   }
   const response = await fetch(cleaned);
   const json = await response.json();

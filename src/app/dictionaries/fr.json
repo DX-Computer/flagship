@@ -102,6 +102,17 @@
         },
         {
           "id": "03",
+          "title": "gateway ipfs",
+          "status": "cartographié",
+          "openness": 1,
+          "image": "digitalax_risv_dxcomputer",
+          "hardware": "Raspberry Pi 5 ou SBC RISC-V · SSD NVMe · ethernet gigabit · NPU en option pour la détection sur l'appareil (Coral/Hailo)",
+          "software": "Kubo ou iroh · gateway HTTP local · chiffrement côté client pour le contenu privé · détection visage/PII à l'upload · registre de contestation avec auto-unpin · réputation des nœuds on-chain",
+          "fabrication": "",
+          "desc": "un nœud et gateway ipfs auto-hébergé : le savoir se publie en CC0, le contenu personnel reste chiffré, et toute personne identifiable dans un fichier peut le contester hors du réseau — à tout moment, le droit n'expire jamais."
+        },
+        {
+          "id": "04",
           "title": "agents locaux",
           "status": "cartographié",
           "openness": 1,
@@ -112,7 +123,7 @@
           "desc": "de petits modèles exécutent des tâches d'agent sur l'appareil ; les identifiants vivent sur le secure element ; les messages entre agents restent chiffrés."
         },
         {
-          "id": "04",
+          "id": "05",
           "title": "scanner de surveillance",
           "status": "cartographié",
           "openness": 1,
@@ -123,7 +134,7 @@
           "desc": "scanne une pièce à la recherche de caméras et de micros cachés par RF, reflet d'objectif et champ magnétique ; fonctionne hors-ligne."
         },
         {
-          "id": "05",
+          "id": "06",
           "title": "social ouvert",
           "status": "cartographié",
           "openness": 1,
@@ -134,7 +145,7 @@
           "desc": "un protocole social entièrement ouvert : l'API et l'algorithme de classement sont ouverts et s'exécutent sur des nœuds confidentiels que n'importe qui peut faire tourner en local ; l'intégrité du nœud est attestée sur une chaîne dédiée."
         },
         {
-          "id": "06",
+          "id": "07",
           "title": "transcodeur vidéo",
           "status": "cartographié",
           "openness": 1,

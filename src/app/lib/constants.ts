@@ -1,8 +1,10 @@
 export const LOCALES: string[] = ["en", "es", "fr", "pt", "ar", "he"];
 
-export const INFURA_GATEWAY: string = "https://thedial.infura-ipfs.io";
-export const INFURA_GATEWAY_INTERNAL: string =
-  "https://digitalax.xyz/api/infura/";
+export const APP_URL: string = "https://app.dx.computer";
+
+export const IPFS_GATEWAY: string = "https://cdn.digitalax.xyz";
+export const IPFS_GATEWAY_INTERNAL: string =
+  "https://cdn.digitalax.xyz/ipfs/";
 
 export const BOARD_BG: string = "#011d42";
 export const METAL_GOLD: string = "#c2a155";
